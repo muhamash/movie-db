@@ -1,15 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.font-manrope {
+  font-family: 'Manrope', sans-serif;
+}
+.font-lato {
+  font-family: 'Lato', sans-serif;
+}
 .font-nunito {
   font-family: 'Nunito', sans-serif;
 }
-
-.font-cinzel {
-  font-family: 'Cinzel', serif;
-}
-
-.font-dancingScript {
+.font-dancing-script {
   font-family: 'Dancing Script', cursive;
 }
 

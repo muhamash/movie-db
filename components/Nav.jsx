@@ -7,7 +7,7 @@ export default function Nav() {
       <div className="absolute inset-x-0 bottom-0 h-[0.6px] bg-gradient-to-r from-rose-500 via-yellow-500 via-green-600 to-sky-600"></div>
 
       {/* Navigation Container */}
-      <div className="container mx-auto px-4 py-6 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo and Links */}
         <div className="flex items-center">
           <Link href="/" className="text-red-600 font-dancingScript font-bold text-4xl">

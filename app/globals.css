@@ -1,8 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
+}
 
-:root {
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-dancingScript {
+  font-family: 'Dancing Script', cursive;
+}
+
+
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -18,7 +30,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
 
 @layer utilities {
   .text-balance {

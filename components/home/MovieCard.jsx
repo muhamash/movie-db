@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default async function MovieCard({isTrend}) {
+export default async function MovieCard({isTrend, movie}) {
   return (
     <div
       className="flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform"

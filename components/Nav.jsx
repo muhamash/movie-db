@@ -14,9 +14,6 @@ export default function Nav() {
             MOVIE DB
           </Link>
           <div className="ml-8 space-x-4">
-            <Link href="/" className="text-white hover:text-gray-300 font-nunito">
-              Home
-            </Link>
             <Link href="/compare" className="text-white hover:text-gray-300 font-nunito">
               Compare Movies
             </Link>

@@ -1,4 +1,3 @@
-import { getMovieById } from "@/utils/getMovie";
 import Image from "next/image";
 
 export default async function MovieDetails ( { movieData } )

@@ -3,8 +3,7 @@ import MovieCard from "../home/MovieCard";
 export default async function YouLike ( { data } )
 {
     const simData = await data;
-    // console.log( simData.simMovie.results );
-
+    
     return (
         <div className='container mx-auto px-4 py-8'>
             <h2 className="text-2xl font-bold mb-4">More Like This</h2>

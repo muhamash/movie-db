@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function MovieCard ( { isTrend, movie } )
 {
-  // console.log(movie)
+  // console.log(movie?.backdrop_path)
   return (
     <div
       className="flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform"

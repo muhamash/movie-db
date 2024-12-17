@@ -28,7 +28,7 @@ export default function InfiniteScrollMovies({ initialData, type, isTrend }) {
             setLoading( true );
             try
             {
-                const response = await fetch(`/api/movies?page=${page}&id=${type}`);
+                const response = await fetch( `/api/movies?page=${page}&id=${type}` );
                 // console.log( response );
                 if ( !response.ok ) throw new Error( "Failed to fetch more movies." );
                 const data = await response.json();
@@ -54,7 +54,7 @@ export default function InfiniteScrollMovies({ initialData, type, isTrend }) {
         {
             fetchMoreMovies();
         }
-    }, [ page ] );
+    }, [ page, type ] );
 
     return (
         <div

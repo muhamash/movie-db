@@ -2,8 +2,7 @@ import { getNowPlayingMovie } from "@/utils/getMovie";
 
 export default async function Hero() {
     const { data, error } = await getNowPlayingMovie();
-
-    // Handle errors
+    
     if (error) {
         return (
             <div className="text-center text-red-500 mt-12">
@@ -12,7 +11,6 @@ export default async function Hero() {
         );
     }
 
-    // Check if data exists and has results
     const movie = data?.results?.[1];
 
     if (!movie) {

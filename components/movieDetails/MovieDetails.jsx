@@ -1,8 +1,9 @@
 import Image from "next/image";
 
-export default async function MovieDetails ( { movieData } )
+export default async function MovieDetails ( { movieData, castData } )
 {
-    // console.log( movieData );
+    const cast = await castData;
+        // console.log( cast?.castData?.cast );
     return (
         <div id="movieDetails" className="min-h-screen pt-20 mb-8">
             {/* Background Image */ }
@@ -19,10 +20,10 @@ export default async function MovieDetails ( { movieData } )
                 </div>
 
                 {/* Content */ }
-                <div className="relative container mx-auto px-4 pt-32">
+                <div className=" container md:relative mx-auto px-4 pt-32">
                     <div className="flex flex-col md:flex-row gap-8">
                         {/* Movie Poster */ }
-                        <div className="md:w-1/3 hover:scale-110 duration-200 transition-all hover:border-[0.5px] border-green-700 rounded-md cursor-pointer hover:shadow-md hover:shadow-slate-500">
+                        <div className=" md:w-1/3 relative hover:scale-110 duration-200 transition-all hover:border-[0.5px] border-green-700 rounded-md cursor-pointer hover:shadow-md hover:shadow-slate-500">
                             <Image
                                 width={ 400 }
                                 height={ 300 }
@@ -33,7 +34,7 @@ export default async function MovieDetails ( { movieData } )
                         </div>
 
                         {/* Movie Details */ }
-                        <div className="md:w-2/3">
+                        <div className="md:w-2/3 w-full relative">
                             <h1 className="text-4xl font-bold mb-4 font-dancingScript">{ movieData?.original_title }</h1>
 
                             {/* Metadata */ }
@@ -65,25 +66,19 @@ export default async function MovieDetails ( { movieData } )
                             </div>
 
                             {/* Cast */ }
-                            <div className="mb-6">
+                            <div className="mb-6 w-full">
                                 <h3 className="text-gray-400 mb-2">Cast</h3>
-                                <div className="flex flex-wrap gap-4 font-nunito">
-                                    { [
-                                        { name: "Naomi Scott", img: "6OLe7TskbEvYpo36eITfX91VoCP.jpg" },
-                                        { name: "Rosemarie DeWitt", img: "44sxIdGtYN24R14OmnZbCpcd8J8.jpg" },
-                                        { name: "Lukas Gage", img: "j7Zub5J9PgCnsfgEC5QCr160JtH.jpg" },
-                                        { name: "Miles Gutierrez-Riley", img: "22JmiXEKoIHTKAdZaxOiS5wVHnM.jpg" },
-                                        { name: "Peter Jacobson", img: "pGi9CnzEG4cLa2viUP89yvlPCyR.jpg" },
-                                    ].map( ( cast, index ) => (
+                                <div className="flex flex-wrap gap-4 font-nunito h-[300px] overflow-y-scroll">
+                                    { cast?.castData?.cast.map( ( cst, index ) => (
                                         <div key={ index } className="text-center">
                                             <Image
                                                 width={ 400 }
                                                 height={ 300 }
-                                                src={ `https://image.tmdb.org/t/p/original/${cast.img}` }
+                                                src={ `https://image.tmdb.org/t/p/original${cst.profile_path}` }
                                                 alt={ `${cast.name}` }
                                                 className="w-24 h-24 rounded-full object-cover mb-2"
                                             />
-                                            <p className="text-sm">{ cast.name }</p>
+                                            <p className="text-sm">{ cst?.name }</p>
                                         </div>
                                     ) ) }
                                 </div>

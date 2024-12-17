@@ -82,9 +82,9 @@ export const getMovieById = async ( movieId ) =>
         {
             throw new Error( `Error: ${res.statusText}` );
         }
-        const movieData = await res.json(); 
+        const movieDataById = await res.json(); 
             // console.log(movieData)
-        return { movieData, error: null }; 
+        return { movieDataById, error: null }; 
     } catch ( err )
     {
         console.error( 'Error fetching popular movies:', err );
@@ -92,4 +92,32 @@ export const getMovieById = async ( movieId ) =>
     }
 };
 
-export const 
+export const getSimMovie = async ( movieId ) =>
+{
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?language=en-US&page=1`;
+    // https://api.themoviedb.org/3/movie/11216/similar?language=en-US&page=1
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNzgxODZhMjA2NjY3N2M2NzQwMzFmMWQ2ZGNiMzljNCIsIm5iZiI6MTczNDI5ODA3OS42NzYsInN1YiI6IjY3NWY0OWRmZjc0YzNhMTM4OGJhMjIzYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vSW8VAinEvzEMpxcGOGAIZb4Wo70KMlfktbWImpv5LI',
+        },
+    };
+
+    try
+    {
+        const res = await fetch( url, options );
+        // console.log(res)
+        if ( !res.ok )
+        {
+            throw new Error( `Error: ${res.statusText}` );
+        }
+        const simMovie = await res.json();
+        // console.log(simMovie)
+        return { simMovie, error: null };
+    } catch ( err )
+    {
+        console.error( 'Error fetching popular movies:', err );
+        return { data: null, error: err.message || 'An unknown error occurred' };
+    }
+};

@@ -1,9 +1,8 @@
 import { getMovieById } from "@/utils/getMovie";
 import Image from "next/image";
 
-export default async function MovieDetails ( { id } )
+export default async function MovieDetails ( { movieData } )
 {
-    const { movieData } = await getMovieById( id )
     // console.log( movieData );
     return (
         <div id="movieDetails" className="min-h-screen pt-20 mb-8">

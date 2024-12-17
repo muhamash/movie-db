@@ -1,6 +1,10 @@
+import { getMovieById } from "@/utils/getMovie";
 import Image from "next/image";
 
-export default async function MovieDetails() {
+export default async function MovieDetails ( { id } )
+{
+    const { movieData } = await getMovieById( id )
+    // console.log( movieData );
     return (
         <div id="movieDetails" className="min-h-screen pt-20 mb-8">
             {/* Background Image */ }
@@ -9,7 +13,7 @@ export default async function MovieDetails() {
                     <Image
                         width={ 400 }
                         height={ 300 }
-                        src="https://image.tmdb.org/t/p/original/iR79ciqhtaZ9BE7YFA1HpCHQgX4.jpg"
+                        src={ `https://image.tmdb.org/t/p/original${movieData?.backdrop_path}` }
                         alt="Smile 2 Background"
                         className="w-full h-full object-cover"
                     />
@@ -24,7 +28,7 @@ export default async function MovieDetails() {
                             <Image
                                 width={ 400 }
                                 height={ 300 }
-                                src="https://image.tmdb.org/t/p/original/ht8Uv9QPv9y7K0RvUyJIaXOZTfd.jpg"
+                                src={ `https://image.tmdb.org/t/p/original${movieData?.poster_path}` }
                                 alt="Smile 2 Poster"
                                 className="w-full rounded-lg shadow-lg"
                             />
@@ -32,27 +36,33 @@ export default async function MovieDetails() {
 
                         {/* Movie Details */ }
                         <div className="md:w-2/3">
-                            <h1 className="text-4xl font-bold mb-4 font-dancingScript">Smile 2</h1>
+                            <h1 className="text-4xl font-bold mb-4 font-dancingScript">{ movieData?.original_title }</h1>
 
                             {/* Metadata */ }
                             <div className="flex items-center mb-4 space-x-4 font-nunito">
-                                <span className="text-green-500 font-nunito">24 November 2024</span>
+                                <span className="text-green-500 font-nunito">{ new Date( movieData?.release_date ).toLocaleDateString( "en-GB", {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric"
+                                } ) }</span>
                                 <span>|</span>
-                                <span>127 min</span>
+                                <span>{ movieData?.runtime } min</span>
                             </div>
 
                             {/* Synopsis */ }
                             <p className="text-lg mb-6 font-lato">
-                                About to embark on a new world tour, global pop sensation Skye
-                                Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her dark past to regain control of her life before it spirals out of control.
+                                {movieData?.overview}
                             </p>
 
                             {/* Genres */ }
                             <div className="mb-6">
                                 <h3 className="text-gray-400 mb-2 ">Genres</h3>
                                 <div className="flex flex-wrap gap-2 font-manrope">
-                                    <span className="px-3 py-1 bg-gray-800 rounded-full text-sm">Horror</span>
-                                    <span className="px-3 py-1 bg-gray-800 rounded-full text-sm">Mystery</span>
+                                    {
+                                        movieData?.genres?.map( g => (
+                                            <span key={ g?.id } className="px-3 py-1 bg-gray-800 rounded-full text-sm">{ g?.name }</span>
+                                        ))
+                                    }
                                 </div>
                             </div>
 

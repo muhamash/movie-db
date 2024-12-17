@@ -1,9 +1,10 @@
 import MovieDetailsPage from "@/components/movieDetails/MovieDetailsPage";
 
-export default async function MoviePage() {
+export default async function MoviePage ({params})
+{
   return (
     <>
-     <MovieDetailsPage/> 
+      <MovieDetailsPage id={ params.movieId } /> 
     </>
   )
 }

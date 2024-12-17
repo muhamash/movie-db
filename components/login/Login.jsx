@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 export default async function Login() {
     return (
         <div className="w-full max-w-md bg-black/70 rounded-lg p-8 shadow-xl">

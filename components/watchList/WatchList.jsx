@@ -7,7 +7,7 @@ export default async function WatchList() {
             <header className="mb-8">
                 <h1 className="text-4xl font-bold text-white">Watch Later</h1>
                 <p className="text-light/70 mt-2 font-lato">
-                    Movies you've saved to watch in the future
+                    Movies you&#39;ve saved to watch in the future
                 </p>
             </header>
           

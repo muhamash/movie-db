@@ -5,13 +5,13 @@ export const metadata = {
 
 export default async function ComparisonRootLayout({
     children,
-    slotId,
+    slot,
 }) {
     return (
         <div className="container mx-auto px-4 pt-24 pb-8">
             { children }
             <div className="grid gap-6 md:grid-cols-2">
-                {slotId}
+                {slot}
             </div>
         </div>
     );

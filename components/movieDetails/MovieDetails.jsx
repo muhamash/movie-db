@@ -10,11 +10,10 @@ export default async function MovieDetails ( { movieData, castData } )
             <div className="relative h-screen">
                 <div className="absolute inset-0">
                     <Image
-                        width={ 400 }
-                        height={ 300 }
                         src={ `https://image.tmdb.org/t/p/original${movieData?.backdrop_path}` }
                         alt="Smile 2 Background"
                         className="w-full h-full object-cover"
+                        fill
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70"></div>
                 </div>

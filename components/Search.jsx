@@ -157,7 +157,7 @@ export default function Search() {
                         { results.length > 0 && (
                             <button
                                 onClick={ handleSeeAllResults }
-                                className="text-yellow-500 font-semibold px-4 py-2 w-full text-center border-t border-gray-600 hover:bg-yellow-600 hover:text-white"
+                                className="text-yellow-500 font-semibold px-4 py-2 w-full text-center border-t border-gray-800 hover:bg-yellow-600 hover:text-white"
                             >
                                 See All Results
                             </button>

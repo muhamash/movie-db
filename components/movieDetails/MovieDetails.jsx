@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HandleWhiteList from "./HandleWhiteList";
 
 export default async function MovieDetails ( { movieData, castData } )
 {
@@ -49,7 +50,7 @@ export default async function MovieDetails ( { movieData, castData } )
 
                             {/* Synopsis */ }
                             <p className="text-lg mb-6 font-lato">
-                                {movieData?.overview}
+                                { movieData?.overview }
                             </p>
 
                             {/* Genres */ }
@@ -59,7 +60,7 @@ export default async function MovieDetails ( { movieData, castData } )
                                     {
                                         movieData?.genres?.map( g => (
                                             <span key={ g?.id } className="px-3 py-1 bg-gray-800 rounded-full text-sm">{ g?.name }</span>
-                                        ))
+                                        ) )
                                     }
                                 </div>
                             </div>
@@ -84,42 +85,7 @@ export default async function MovieDetails ( { movieData, castData } )
                             </div>
 
                             {/* Actions */ }
-                            <div className="mb-6 font-manrope">
-                                <div className="flex flex-wrap gap-4">
-                                    <button className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-lg">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                        >
-                                            <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                            <path d="M17 21H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z" />
-                                            <path d="M12 11v6" />
-                                            <path d="M9 14h6" />
-                                        </svg>
-                                        Add to Watch List
-                                    </button>
-                                    <button className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-lg text-green-600">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                        >
-                                            <path d="M7 12l5 5L22 7" />
-                                            <path d="M2 12l5 5 5-5-5-5" />
-                                        </svg>
-                                        Added to Watch List
-                                    </button>
-                                </div>
-                            </div>
+                            <HandleWhiteList id={movieData?.id}/>
 
                             {/* Share Buttons */ }
                             <div className="mb-6">
@@ -138,7 +104,7 @@ export default async function MovieDetails ( { movieData, castData } )
                                                 alt={ platform.name }
                                                 className="w-8 h-8 rounded-full object-cover mb-2 mx-auto"
                                             />
-                                            <p className="text-sm">{ platform.name }</p>
+                                            {/* <p className="text-sm">{ platform.name }</p> */ }
                                         </button>
                                     ) ) }
                                 </div>

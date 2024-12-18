@@ -1,24 +1,14 @@
 import { searchMovie } from "@/utils/getMovie";
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 export async function GET(request) {
-  
-  // function normalizeString(str) {
-  //       return str
-  //       .normalize('NFD')
-  //       .replace(/[\u0300-\u036f]/g, '')
-  //       .replace(/[^a-zA-Z0-9]/g, '');
-  // };
-
   try {
-
     const { searchParams } = new URL(request.url);
     const page = searchParams.get("page");
     const query = searchParams.get( "query" );
-      
     const serachResult = await searchMovie( query, page );
-    // console.log(serachResult)
+
     if (serachResult?.searchData?.results?.length === 0) {
       return new Response( JSON.stringify( {
         status: 404,

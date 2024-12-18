@@ -99,7 +99,7 @@ export default function Search() {
                 type="text"
                 id="searchInput"
                 placeholder="Search movies..."
-                className="bg-black bg-opacity-50 text-white px-4 py-2 rounded border border-gray-600 focus:outline-none focus:border-white"
+                className="bg-black bg-opacity-50 font-manrope text-white px-4 py-2 rounded border border-gray-600 focus:outline-none focus:border-white"
                 value={ query }
                 onChange={ handleInputChange }
                 onKeyDown={ handleKeyDown }
@@ -108,13 +108,13 @@ export default function Search() {
                 {/* Loading Indicator */ }
                 { isLoading && (
                     <motion.div
-                        className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2"
+                        className="absolute top-full right-4 left-4 mt-5"
                         initial={ { opacity: 0 } }
                         animate={ { opacity: 1 } }
                         exit={ { opacity: 0 } }
                         transition={ { duration: 0.2, ease: "easeInOut" } }
                     >
-                        <div className="loader w-6 h-6 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
+                        <span className="searchLoader"></span>
                     </motion.div>
                 ) }
 
@@ -133,7 +133,7 @@ export default function Search() {
                                 <motion.li
                                     onClick={ () => handleResultClick( movie.id ) }
                                     key={ movie.id }
-                                    className="px-4 py-2 text-yellow-500 font-semibold cursor-pointer hover:shadow-sm hover:bg-yellow-600 hover:text-white"
+                                    className="px-4 py-2 text-yellow-500 font-semibold cursor-pointer hover:shadow-sm hover:bg-yellow-600 hover:text-white font-nunito text-sm font-normal"
                                     initial={ { opacity: 0, x: -10 } }
                                     animate={ { opacity: 1, x: 0 } }
                                     exit={ { opacity: 0, x: 10 } }
@@ -157,7 +157,7 @@ export default function Search() {
                         { results.length > 0 && (
                             <button
                                 onClick={ handleSeeAllResults }
-                                className="text-yellow-500 font-semibold px-4 py-2 w-full text-center border-t border-gray-800 hover:bg-yellow-600 hover:text-white"
+                                className="text-yellow-500 font-semibold px-4 py-2 w-full text-center border-t border-gray-800 hover:bg-yellow-600 hover:text-white font-manrope"
                             >
                                 See All Results
                             </button>

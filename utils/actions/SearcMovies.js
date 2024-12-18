@@ -7,7 +7,6 @@ export async function searchMovies(formData) {
 
         const res = await fetch(`http://localhost:3000/api/search?query=${query}`);
         
-        // Handle fetch response
         if (!res.ok) {
             console.warn(`Error fetching data: ${res.statusText}`);
             return [];

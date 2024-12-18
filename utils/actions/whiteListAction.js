@@ -5,9 +5,10 @@ const { updateWhiteList } = require( "@/db/queries" );
 
 export async function addWhiteList(userId, movieId) {
     try {
-        await updateWhiteList(userId, movieId);
+        await updateWhiteList(String(userId), movieId);
     } catch(error) {
+        console.error("Error in addWhiteList:", error);
         throw error;
     }
-    revalidateTag('whitelist');
+    revalidateTag('whiteLists');
 };

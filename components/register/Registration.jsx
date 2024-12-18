@@ -1,3 +1,4 @@
+import { registerUser } from "@/utils/actions/formAction";
 import Link from "next/link";
 
 export default async function Registration() {
@@ -6,32 +7,37 @@ export default async function Registration() {
             <div className="text-center">
                 <h1 className="text-white text-3xl font-bold mb-6">Create Your Account</h1>
 
-                <form  id="signupForm" className="space-y-4">
+                <form  id="signupForm" className="space-y-4" action={registerUser}>
                     <input
+                        name="firstName"
                         type="text"
                         placeholder="First Name"
                         className="w-full font-nunito p-3 bg-moviedb-gray text-white rounded focus:outline-none focus:ring-2 focus:ring-moviedb-red"
                         required
                     />
                     <input
+                        name="secondName"
                         type="text"
                         placeholder="Last Name"
                         className="w-full p-3 font-nunito bg-moviedb-gray text-white rounded focus:outline-none focus:ring-2 focus:ring-moviedb-red"
                         required
                     />
                     <input
+                        name="email"
                         type="email"
                         placeholder="Email Address"
                         className="w-full p-3 font-nunito bg-moviedb-gray text-white rounded focus:outline-none focus:ring-2 focus:ring-moviedb-red"
                         required
                     />
                     <input
+                        name="password"
                         type="password"
                         placeholder="Create Password"
                         className="w-full font-nunito p-3 bg-moviedb-gray text-white rounded focus:outline-none focus:ring-2 focus:ring-moviedb-red"
                         required
                     />
                     <input
+                        name="password"
                         type="password"
                         placeholder="Confirm Password"
                         className="w-full font-nunito p-3 bg-moviedb-gray text-white rounded focus:outline-none focus:ring-2 focus:ring-moviedb-red"

@@ -3,7 +3,7 @@
 export async function searchMovies(formData) {
     try {
         const query = formData.get("search")?.trim();
-        if (!query) return []; // Return empty array if query is empty
+        if (!query) return []; 
 
         const res = await fetch(`http://localhost:3000/api/search?query=${query}`);
         

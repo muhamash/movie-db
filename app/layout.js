@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import AuthProvider from "@/context/authProvider";
 import { dbConnect } from "@/service/mongo";
 import { dancingScript, lato, manrope, nunito } from "./fonts/font";
 import "./globals.css";
@@ -15,12 +16,14 @@ export default async function RootLayout ( { children } )
   return (
     <html
       lang="en"
-      className={`${manrope.className} ${nunito.className} ${dancingScript.className} ${lato.className}`}
+      className={ `${manrope.className} ${nunito.className} ${dancingScript.className} ${lato.className}` }
     >
-      <body className="antialiased bg-black text-white">
-        <Nav/>
-        { children }
-      </body>
+      <AuthProvider>
+        <body className="antialiased bg-black text-white">
+          <Nav />
+          { children }
+        </body>
+      </AuthProvider>
     </html>
   );
 }

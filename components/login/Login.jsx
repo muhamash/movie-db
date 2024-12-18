@@ -1,5 +1,6 @@
 'use client'
 
+import { useAuth } from '@/hooks/useAuth';
 import { performLogin } from '@/utils/actions/formAction';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -8,6 +9,8 @@ export default function Login() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false); 
     const router = useRouter();
+
+    const { auth, setAuth } = useAuth();
 
     async function onSubmit(event) {
         event.preventDefault();
@@ -18,7 +21,9 @@ export default function Login() {
             const formData = new FormData(event.currentTarget);
             const found = await performLogin(formData);
 
-            if (found) {
+            if ( found )
+            {
+                setAuth( found );
                 router.push('/');
             } else {
                 setError('Please provide valid login credentials.');

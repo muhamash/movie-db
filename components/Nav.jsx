@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Search from "./Search";
+import UsersHandle from "./UserHandle";
 
 export default async function Nav() {
   return (
@@ -23,7 +24,7 @@ export default async function Nav() {
             </Link>
           </div>
         </div>
-
+        <UsersHandle/>
         {/* Search Input */}
         <Search/>
       </div>

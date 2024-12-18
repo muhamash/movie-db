@@ -6,11 +6,15 @@ export default function HandleWhiteList ( { id } )
 {
     const { auth } = useAuth();
     console.log( id, auth );
-    
+
+    const handleWhiteListButton = async(id)=>{
+
+    }
+
     return (
         <div className="mb-6 font-manrope">
             <div className="flex flex-wrap gap-4">
-                <button className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-lg">
+                <button onClick={handleWhiteListButton} className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-lg">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"

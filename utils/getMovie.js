@@ -153,9 +153,9 @@ export const getCast = async (movieId) =>
     }
 }
 
-export const searchMovie = async ( movie ) =>
+export const searchMovie = async ( movie, page = 1 ) =>
 {
-    const url = `https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`;
+    const url = `https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=${page}`;
 
     const options = {
         method: 'GET',

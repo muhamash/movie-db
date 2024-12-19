@@ -22,58 +22,38 @@ export async function updateWhiteList(userId, movieId) {
         }
 
         const objectId = new mongoose.Types.ObjectId(userId);
-        console.log("ObjectId:", objectId);
 
-
-        const whiteListEntry = await whiteListModel.findOne({ userId: objectId }).lean();
-        console.log("WhiteList Entry:", whiteListEntry);
+        // Fetch twhitelist entry
+        const whiteListEntry = await whiteListModel.findOne({ userId: objectId });
 
         if (whiteListEntry) {
-            if (whiteListEntry.movieIds.includes(movieId)) {
+            // Check  the movieId -> in the movieIds array
+            const movieIndex = whiteListEntry.movieIds.indexOf(movieId);
 
-                if (whiteListEntry.movieIds.length === 1) {
-                    await whiteListModel.deleteOne({ userId: objectId });
-                    return {
-                        success: true,
-                        message: `MovieId ${movieId} removed, and whitelist entry deleted.`,
-                    };
-                } else {
-
-                    whiteListEntry.movieIds = whiteListEntry.movieIds.filter((id) => id !== movieId);
-                    await whiteListModel.updateOne(
-                        { userId: objectId },
-                        { movieIds: whiteListEntry.movieIds }
-                    );
-                    return {
-                        success: true,
-                        message: `MovieId ${movieId} removed successfully.`,
-                        whiteList: whiteListEntry.movieIds,
-                    };
-                }
+            if (movieIndex > -1) {
+                // If movieId exists then remove it
+                whiteListEntry.movieIds.splice(movieIndex, 1);
             } else {
+                // If movieId doesn't exist then add it
                 whiteListEntry.movieIds.push(movieId);
-                await whiteListModel.updateOne(
-                    { userId: objectId },
-                    { movieIds: whiteListEntry.movieIds }
-                );
-                return {
-                    success: true,
-                    message: `MovieId ${movieId} added successfully.`,
-                    whiteList: whiteListEntry.movieIds,
-                };
             }
-        } else {
 
+            await whiteListEntry.save();
+        } else {
+            // If no whitelist exists  then create one with the movieId
             await whiteListModel.create({
                 userId: objectId,
                 movieIds: [movieId],
             });
-            return {
-                success: true,
-                message: `Whitelist created, and movieId ${movieId} added.`,
-                whiteList: [movieId],
-            };
         }
+
+        return {
+            success: true,
+            message: whiteListEntry
+                ? `Whitelist updated successfully.`
+                : `Whitelist created, and movieId ${movieId} added.`,
+            whiteList: whiteListEntry ? whiteListEntry.movieIds : [movieId],
+        };
     } catch (error) {
         console.error("Error updating whitelist:", error);
         return { success: false, message: "Failed to update whitelist." };

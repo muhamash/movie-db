@@ -10,5 +10,5 @@ export async function addWhiteList(userId, movieId) {
         console.error("Error in addWhiteList:", error);
         throw error;
     }
-    revalidateTag('whiteLists');
+    revalidateTag('whitelists');
 };

@@ -1,8 +1,8 @@
 import { ImageResponse } from '@vercel/og';
 
-export const config = {
-  runtime: 'edge',
-};
+export const runtime = "edge"
+export const dynamicParams = true
+export const revalidate = true
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -16,6 +16,8 @@ export async function GET(req) {
     `${new URL(req.url).protocol}//${new URL(req.url).host}/_next/image?url=${encodeURIComponent(
       cover
     )}&w=1200&q=75`;
+
+  console.log( coverUrl, title, description );
 
   return new ImageResponse(
     (

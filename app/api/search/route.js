@@ -1,6 +1,7 @@
 import { searchMovie } from "@/utils/getMovie";
 
 export const dynamic = "force-dynamic";
+export const revalidate = true
 
 export async function GET(request) {
   try {

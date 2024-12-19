@@ -24,7 +24,8 @@ export default function ShareButtons({ title, description, image }) {
     const pathname = usePathname();
     const url = `https://movie-db-eight-sable.vercel.app${pathname}`;
     const hashtags = ["#movieDB", "#movies", "#cinema"];
-    const ogImageUrl = `https://movie-db-eight-sable.vercel.app/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&cover=${encodeURIComponent(image)}`;
+    const ogImageUrl = `http://localhost:3000/api/og?title=${encodeURIComponent( title )}&description=${encodeURIComponent( description )}&cover=${encodeURIComponent( image )}`;
+    // console.log()
 
     return (
         <>

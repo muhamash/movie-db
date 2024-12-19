@@ -1,6 +1,7 @@
 import { whiteListModel } from "@/db/whiteListModel";
 
 export const dynamic = 'force-dynamic';
+export const revalidate = true
 
 export async function GET(request, { params }) {
     const { searchParams } = new URL(request.url);

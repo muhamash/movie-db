@@ -78,17 +78,15 @@ export const getMovieById = async ( movieId ) =>
     try
     {
         const res = await fetch( url, options );
-        // console.log(res)
         if ( !res.ok )
         {
             throw new Error( `Error: ${res.statusText}` );
         }
-        const movieDataById = await res.json(); 
-            // console.log(movieData)
-        return { movieDataById, error: null }; 
+        const movieDataById = await res.json();
+        return { movieDataById, error: null };
     } catch ( err )
     {
-        console.error( 'Error fetching popular movies:', err );
+        console.error( 'Error fetching movie data:', err );
         return { data: null, error: err.message || 'An unknown error occurred' };
     }
 };

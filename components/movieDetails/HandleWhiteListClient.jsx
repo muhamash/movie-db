@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/hooks/useAuth";
 import { addWhiteList } from "@/utils/actions/whiteListAction";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
@@ -8,13 +9,25 @@ export default function HandleWhiteListClient({ id, initialInterested }) {
     const [interested, setInterested] = useState(initialInterested);
     const [isPending, startTransition] = useTransition();
     const router = useRouter();
+    const { auth } = useAuth();
 
-    const handleWhiteListButton = async () => {
-        try {
-            await addWhiteList(String(auth?.id), id);
-            setInterested(!interested);
-        } catch (error) {
-            console.error("Error updating whitelist:", error);
+    const handleWhiteListButton = async () =>
+    {
+        if ( !auth )
+        {
+            router.push( "/login" );
+            return;
+        }
+        else
+        {
+            try
+            {
+                await addWhiteList( String( auth?.id ), id );
+                setInterested( !interested );
+            } catch ( error )
+            {
+                console.error( "Error updating whitelist:", error );
+            }
         }
     };
 

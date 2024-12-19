@@ -8,7 +8,7 @@ export default function MovieCard ( { isTrend, movie, userId } )
     <div
       className="flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform"
     >
-      <Link href={`/movie/${movie?.id}&userId?userId=${userId === undefined ? 'notLoggedIn' : userId}`}>
+      <Link href={`/movie/${movie?.id}?userId=${userId === undefined ? 'notLoggedIn' : userId}`}>
         <Image
           src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
           alt="Smile 2"

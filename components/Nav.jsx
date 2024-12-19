@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Search from "./Search";
 import UsersHandle from "./UserHandle";
+import WatchListLink from "./watchList/WatchListLink";
 
 export default async function Nav() {
   return (
@@ -15,13 +16,11 @@ export default async function Nav() {
           <Link href="/" className="text-red-600 font-dancingScript font-bold text-4xl">
             MOVIE DB
           </Link>
-          <div className="ml-8 space-x-4">
+          <div className="ml-8 flex space-x-4">
             <Link href="/compare" className="text-white hover:text-gray-300 font-nunito">
               Compare Movies
             </Link>
-            <Link href="/watchList" className="text-white hover:text-gray-300 font-nunito">
-              Watch Later
-            </Link>
+            <WatchListLink/>
           </div>
         </div>
         <UsersHandle/>

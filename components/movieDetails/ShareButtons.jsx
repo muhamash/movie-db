@@ -23,19 +23,22 @@ import
 export default function ShareButtons({ title, description, image }) {
     const pathname = usePathname();
     const url = `https://movie-db-eight-sable.vercel.app${pathname}`;
-    const hashtags = ["#movieDB", "#movies", "#cinema"];
-    const ogImageUrl = `http://localhost:3000/api/og?title=${encodeURIComponent( title )}&description=${encodeURIComponent( description )}&cover=${encodeURIComponent( image )}`;
-    // console.log()
+
+    const ogImageUrl = `https://movie-db-eight-sable.vercel.app/api/og?title=${encodeURIComponent(
+        title
+    )}&description=${encodeURIComponent( description )}&cover=${encodeURIComponent( image )}`;
+    
+    console.log(ogImageUrl);
 
     return (
         <>
             <Head>
                 <title>{title}</title>
-                <meta property="og:title" content={title} />
-                <meta property="og:description" content={description} />
-                <meta property="og:image" content={ogImageUrl} />
-                <meta property="og:url" content={url} />
-                <meta property="og:type" content="website" />
+                <meta name="title" property="og:title" content={title} />
+                <meta name="description" property="og:description" content={description} />
+                <meta name="image" property="og:image" content={ogImageUrl} />
+                <meta name="url" property="og:url" content={url} />
+                <meta name="website" property="og:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={description} />
@@ -44,15 +47,15 @@ export default function ShareButtons({ title, description, image }) {
             <div className="share-buttons mb-6">
                 <h3 className="text-gray-400 mb-2">Share on social media</h3>
                 <div className="flex gap-4">
-                    <FacebookShareButton url={url} quote={title} hashtag={hashtags.join(" ")}>
+                    <FacebookShareButton url={url} quote={title}>
                         <FacebookIcon size={32} round />
                     </FacebookShareButton>
 
-                    <TwitterShareButton url={url} title={title} hashtags={hashtags}>
+                    <TwitterShareButton url={url} title={title}>
                         <TwitterIcon size={32} round />
                     </TwitterShareButton>
 
-                    <LinkedinShareButton url={url} title={title} summary={description} source="MovieDB">
+                    <LinkedinShareButton url={url} title={title} summary={description}>
                         <LinkedinIcon size={32} round />
                     </LinkedinShareButton>
 

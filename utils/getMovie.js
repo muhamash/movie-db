@@ -64,8 +64,7 @@ export const getMovieList = async (page, types) => {
     }
 };
 
-export const getMovieById = async ( movieId ) =>
-{
+export const getMovieById = async (movieId) => {
     const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
     const options = {
         method: 'GET',
@@ -75,18 +74,15 @@ export const getMovieById = async ( movieId ) =>
         },
     };
 
-    try
-    {
-        const res = await fetch( url, options );
-        if ( !res.ok )
-        {
-            throw new Error( `Error: ${res.statusText}` );
+    try {
+        const res = await fetch(url, options);
+        if (!res.ok) {
+            throw new Error(`Error: ${res.statusText}`);
         }
         const movieDataById = await res.json();
         return { movieDataById, error: null };
-    } catch ( err )
-    {
-        console.error( 'Error fetching movie data:', err );
+    } catch (err) {
+        console.error('Error fetching movie data:', err);
         return { data: null, error: err.message || 'An unknown error occurred' };
     }
 };

@@ -1,5 +1,7 @@
 'use client';
 
+import Head from 'next/head';
+import { usePathname } from 'next/navigation';
 import
     {
         FacebookIcon,
@@ -16,46 +18,60 @@ import
         TwitterShareButton,
         WhatsappIcon,
         WhatsappShareButton,
-    } from 'next-share';
-import { usePathname } from 'next/navigation';
+    } from 'react-share';
 
 export default function ShareButtons({ title, description, image }) {
     const pathname = usePathname();
     const url = `https://movie-db-eight-sable.vercel.app${pathname}`;
     const hashtags = ["#movieDB", "#movies", "#cinema"];
+    const ogImageUrl = `https://movie-db-eight-sable.vercel.app/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&cover=${encodeURIComponent(image)}`;
 
     return (
-        <div className="share-buttons mb-6">
-            <h3 className="text-gray-400 mb-2">Share on social media</h3>
-            <div className="flex gap-4">
-                <FacebookShareButton url={url} quote={title} hashtag={hashtags.join(" ")}>
-                    <FacebookIcon size={32} round />
-                </FacebookShareButton>
+        <>
+            <Head>
+                <title>{title}</title>
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={description} />
+                <meta property="og:image" content={ogImageUrl} />
+                <meta property="og:url" content={url} />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={title} />
+                <meta name="twitter:description" content={description} />
+                <meta name="twitter:image" content={ogImageUrl} />
+            </Head>
+            <div className="share-buttons mb-6">
+                <h3 className="text-gray-400 mb-2">Share on social media</h3>
+                <div className="flex gap-4">
+                    <FacebookShareButton url={url} quote={title} hashtag={hashtags.join(" ")}>
+                        <FacebookIcon size={32} round />
+                    </FacebookShareButton>
 
-                <TwitterShareButton url={url} title={title} hashtags={hashtags}>
-                    <TwitterIcon size={32} round />
-                </TwitterShareButton>
+                    <TwitterShareButton url={url} title={title} hashtags={hashtags}>
+                        <TwitterIcon size={32} round />
+                    </TwitterShareButton>
 
-                <LinkedinShareButton url={url} title={title} summary={description}>
-                    <LinkedinIcon size={32} round />
-                </LinkedinShareButton>
+                    <LinkedinShareButton url={url} title={title} summary={description} source="MovieDB">
+                        <LinkedinIcon size={32} round />
+                    </LinkedinShareButton>
 
-                <PinterestShareButton url={url} media={image} description={description}>
-                    <PinterestIcon size={32} round />
-                </PinterestShareButton>
+                    <PinterestShareButton url={url} media={ogImageUrl} description={description}>
+                        <PinterestIcon size={32} round />
+                    </PinterestShareButton>
 
-                <RedditShareButton url={url} title={title}>
-                    <RedditIcon size={32} round />
-                </RedditShareButton>
+                    <RedditShareButton url={url} title={title}>
+                        <RedditIcon size={32} round />
+                    </RedditShareButton>
 
-                <TelegramShareButton url={url} title={title}>
-                    <TelegramIcon size={32} round />
-                </TelegramShareButton>
+                    <TelegramShareButton url={url} title={title}>
+                        <TelegramIcon size={32} round />
+                    </TelegramShareButton>
 
-                <WhatsappShareButton url={url} title={title} separator=":: ">
-                    <WhatsappIcon size={32} round />
-                </WhatsappShareButton>
+                    <WhatsappShareButton url={url} title={title} separator=":: ">
+                        <WhatsappIcon size={32} round />
+                    </WhatsappShareButton>
+                </div>
             </div>
-        </div>
+        </>
     );
 }

@@ -43,6 +43,7 @@ export async function GET(request) {
           JSON.stringify({
               status: 200,
               success: true,
+              totalData: searchResult?.searchData?.total_results,
               data: searchResult?.searchData?.results,
               message: "Movies fetched successfully",
           }),

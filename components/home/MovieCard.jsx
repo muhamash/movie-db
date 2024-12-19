@@ -1,14 +1,18 @@
+"use client";
+
+import { useAuth } from '@/hooks/useAuth';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function MovieCard ( { isTrend, movie, userId } )
+export default function MovieCard ( { isTrend, movie } )
 {
-  // console.log(movie?.backdrop_path)
+  const { auth } = useAuth();
+
   return (
     <div
       className="flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform"
     >
-      <Link href={`/movie/${movie?.id}?userId=${userId === undefined ? 'notLoggedIn' : userId}`}>
+      <Link href={`/movie/${movie?.id}?userId=${auth?.id === undefined ? 'notLoggedIn' : auth?.id}`}>
         <Image
           src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
           alt="Smile 2"

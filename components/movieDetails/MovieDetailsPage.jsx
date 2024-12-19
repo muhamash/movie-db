@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import MovieDetails from "./MovieDetails";
 import YouLike from "./YouLike";
 
-export default async function MovieDetailsPage ( { id } )
+export default async function MovieDetailsPage ( { id, userId } )
 {
     const  movieDataById  = getMovieById( id );
     const simMoviePromise = getSimMovie( id );
@@ -15,7 +15,7 @@ export default async function MovieDetailsPage ( { id } )
     // console.log(movieData, simMovi.results)
     return (
         <>
-            <MovieDetails castData={castPromise} movieData={ movieData?.movieDataById } />
+            <MovieDetails castData={ castPromise } movieData={ movieData?.movieDataById } userId={ userId } />
             <Suspense fallback={
                 <div
                     className="flex relative w-48 h-[288px] rounded-lg cursor-pointer hover:scale-105 transition-transform"

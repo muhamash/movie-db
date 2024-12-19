@@ -1,7 +1,7 @@
 import Image from "next/image";
 import HandleWhiteList from "./HandleWhiteList";
 
-export default async function MovieDetails ( { movieData, castData } )
+export default async function MovieDetails ( { movieData, castData, userId } )
 {
     const cast = await castData;
         // console.log( cast?.castData?.cast );
@@ -85,7 +85,7 @@ export default async function MovieDetails ( { movieData, castData } )
                             </div>
 
                             {/* Actions */ }
-                            <HandleWhiteList id={movieData?.id}/>
+                            <HandleWhiteList id={ movieData?.id } userId={ userId } />
 
                             {/* Share Buttons */ }
                             <div className="mb-6">

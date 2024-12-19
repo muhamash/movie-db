@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function MovieCard ( { isTrend, movie } )
+export default function MovieCard ( { isTrend, movie, userId } )
 {
   // console.log(movie?.backdrop_path)
   return (
     <div
       className="flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform"
     >
-      <Link href={`/movie/${movie?.id}`}>
+      <Link href={`/movie/${movie?.id}&userId?userId=${userId === undefined ? 'notLoggedIn' : userId}`}>
         <Image
           src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
           alt="Smile 2"

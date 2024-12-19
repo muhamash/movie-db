@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 import MovieCard from "./home/MovieCard";
 
@@ -7,7 +8,8 @@ export default function InfiniteScrollMovies({ initialData, type, isTrend }) {
   const [movies, setMovies] = useState(initialData?.results || []);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(2); 
-  const [noMoreMovies, setNoMoreMovies] = useState(false); 
+    const [ noMoreMovies, setNoMoreMovies ] = useState( false );
+  const {auth} = useAuth();  
 
   const handleScroll = (e) => {
     const { scrollLeft, scrollWidth, clientWidth } = e.target;
@@ -50,7 +52,7 @@ export default function InfiniteScrollMovies({ initialData, type, isTrend }) {
             }
         };
 
-        if ( page > 2 )
+        if ( page > 1 )
         {
             fetchMoreMovies();
         }
@@ -64,10 +66,10 @@ export default function InfiniteScrollMovies({ initialData, type, isTrend }) {
             style={ { maxHeight: "80vh", overflowX: "auto" } }
         >
             { movies.length === 0 && !loading && <p className="text-center text-red-700 font-lato">No movies available.</p> }
-            { movies.map( ( movie ) => (
-                <MovieCard key={ movie.id } movie={ movie } isTrend={ isTrend }/>
+            { movies.map( ( movie, index ) => (
+                <MovieCard key={ index } movie={ movie } isTrend={ isTrend } userId={ auth?.id } />
             ) ) }
-            { loading &&( <div className="w-full h-full flex items-center justify-center"><span className="loaderScrolling"></span></div>) }
+            { loading && ( <div className="w-full h-full flex items-center justify-center"><span className="loaderScrolling"></span></div> ) }
             { noMoreMovies && <p className="text-center  text-red-700 font-lato">No more movies to show.</p> }
         </div>
     );

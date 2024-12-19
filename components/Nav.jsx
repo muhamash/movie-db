@@ -19,13 +19,12 @@ export default async function Nav() {
             <Link href="/compare" className="text-white hover:text-gray-300 font-nunito">
               Compare Movies
             </Link>
-            <Link href="/watchlist" className="text-white hover:text-gray-300 font-nunito">
+            <Link href="/watchList" className="text-white hover:text-gray-300 font-nunito">
               Watch Later
             </Link>
           </div>
         </div>
         <UsersHandle/>
-        {/* Search Input */}
         <Search/>
       </div>
     </nav>

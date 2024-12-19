@@ -5,7 +5,7 @@ export default async function MoviePage (params)
   // console.log(params)
   return (
     <div className="relative">
-      <MovieDetailsPage id={ params?.params?.movieId } userId={params?.searchParams?.userId}/> 
+      <MovieDetailsPage id={ params?.params?.movieId } userId={ params?.searchParams?.userId } />
     </div>
-  )
+  );
 }

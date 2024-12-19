@@ -5,28 +5,17 @@ import MovieDetails from "./MovieDetails";
 import YouLike from "./YouLike";
 
 export default async function MovieDetailsPage ( { id, userId } )
-{
-    // let movieId = null;
-    // let userId = null;
-
-    // if (id) {
-    //     const decodedParams = decodeURIComponent(id);
-
-    //     const [movieIdPart, userIdPart] = decodedParams.split('&');
-    //     movieId = movieIdPart;
-    //     userId = userIdPart?.split('=')[1];
-    // }
-    
+{    
     const  movieDataById  = getMovieById( id );
     const simMoviePromise = getSimMovie( id );
     const castPromise = getCast( id );
-    // const [movieData, simMovi] = await Promise.all( [ movieDataById, simMovie ] );
 
     const movieData = await movieDataById;
-    if( movieData === undefined || movieData.error  || movieData === null )  {
+    
+    if( movieData === undefined || movieData.error  || !movieData?.movieDataById )  {
         return notFound();
     }
-    console.log(movieData?.movieDataById)
+    // console.log(movieData?.movieDataById)
     return (
         <>
             <MovieDetails castData={ castPromise } movieData={ movieData?.movieDataById } userId={userId} movieId={id} />

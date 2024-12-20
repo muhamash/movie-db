@@ -27,46 +27,55 @@ export default function InfiniteScrollWrapper({
     }
   };
 
-  useEffect(() => {
-    const fetchMoreItems = async () => {
-      if (loading || noMoreItems) return;
+    useEffect( () =>
+    {
+        const fetchMoreItems = async () =>
+        {
+            if ( loading || noMoreItems ) return;
 
-      setLoading(true);
-      try {
-        const endpoint = type
-          ? `/api/movies?page=${page}&id=${type}&movieId=${movieId}`
-            : `/api/search?query=${query}&page=${page}`;
+            setLoading( true );
+            try
+            {
+                const endpoint = type
+                    ? `/api/movies?page=${page}&id=${type}&movieId=${movieId}`
+                    : `/api/search?query=${query}&page=${page}`;
           
-        const response = await fetch(endpoint);
+                const response = await fetch( endpoint );
 
-        if (!response.ok) throw new Error("Failed to fetch more items.");
+                if ( !response.ok ) throw new Error( "Failed to fetch more items." );
 
-        const data = await response.json();
-        console.log("Fetched data:", data);
+                const data = await response.json();
+                console.log( "Fetched data:", data );
 
-        if (data.data?.length > 0) {
-          setItems((prevItems) => [...prevItems, ...data.data]);
-        } else {
-          setNoMoreItems(true);
+                if ( data.data?.length > 0 )
+                {
+                    setItems( ( prevItems ) => [ ...prevItems, ...data.data ] );
+                } else
+                {
+                    setNoMoreItems( true );
+                }
+            } catch ( error )
+            {
+                console.error( "Error fetching more items:", error );
+                setNoMoreItems( true );
+            } finally
+            {
+                setLoading( false );
+            }
+        };
+
+        if ( page > 1 )
+        {
+            fetchMoreItems();
         }
-      } catch (error) {
-        console.error("Error fetching more items:", error);
-        setNoMoreItems(true);
-      } finally {
-        setLoading(false);
-      }
-    };
+    }, [ page, type, query, movieId ] );
 
-    if (page > 1) {
-      fetchMoreItems();
-    }
-  }, [page, type, query, movieId, loading, noMoreItems]);
-
-  useEffect(() => {
-    setItems(initialData?.results || []);
-    setPage(1);
-    setNoMoreItems(false);
-  }, [initialData, query]);
+    useEffect( () =>
+    {
+        setItems( initialData?.results || [] );
+        setPage( 1 );
+        setNoMoreItems( false );
+    }, [ initialData, query ] );
 
     return (
         <Fragment>
@@ -74,7 +83,7 @@ export default function InfiniteScrollWrapper({
                 id="itemsContainer"
                 className={ `${MovieCard
                     ? "flex flex-nowrap space-x-4 overflow-x-auto"
-                    : "grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto w-full"
+                    : "grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto w-full px-2"
                     } pb-4 flex items-center justify-center` }
                 onScroll={ handleScroll }
                 style={ { maxHeight: "80vh", ...( MovieCard ? { overflowX: "auto" } : {} ) } }

@@ -103,7 +103,7 @@ export default function Search() {
                 type="text"
                 id="searchInput"
                 placeholder="Search movies..."
-                className="bg-black bg-opacity-50 font-manrope text-white px-4 py-2 rounded border border-gray-600 focus:outline-none focus:border-white"
+                className="bg-black bg-opacity-50 font-manrope text-white md:px-4 px-2 py-2 rounded border border-gray-600 focus:outline-none focus:border-white"
                 value={query}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}

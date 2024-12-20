@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useCallback, useReducer } from "react";
 
-// Reducer function to handle different actions
 const searchReducer = (state, action) => {
     switch (action.type) {
         case "START_SEARCH":
@@ -18,7 +17,7 @@ const searchReducer = (state, action) => {
             return { ...state, query: action.payload };
         case "TOGGLE_DROPDOWN":
             return { ...state, isDropdownVisible: action.payload };
-        case "CLEAR_QUERY": // New action to clear the query and hide the dropdown
+        case "CLEAR_QUERY": 
             return { ...state, query: "", isDropdownVisible: false };
         default:
             return state;
@@ -38,7 +37,6 @@ export default function Search() {
     const [state, dispatch] = useReducer(searchReducer, initialState);
     const { query, results, isLoading, error, isDropdownVisible } = state;
 
-    // Debounce function to delay the execution of fetchSearchResults
     const debounce = (func, delay) => {
         let timer;
         return (...args) => {
@@ -80,20 +78,20 @@ export default function Search() {
     const handleKeyDown = (e) => {
         if (e.key === "Enter" && query.trim()) {
             router.push(`/searchResults?query=${encodeURIComponent(query.trim())}`);
-            dispatch({ type: "CLEAR_QUERY" }); // Clear the query after pressing Enter
+            dispatch({ type: "CLEAR_QUERY" }); 
         }
     };
 
     const handleSeeAllResults = () => {
         if (query.trim()) {
             router.push(`/searchResults?query=${encodeURIComponent(query.trim())}`);
-            dispatch({ type: "CLEAR_QUERY" }); // Clear the query after clicking "See All Results"
+            dispatch({ type: "CLEAR_QUERY" }); 
         }
     };
 
     const handleResultClick = (movieId) => {
         router.push(`/movie/${movieId}`);
-        dispatch({ type: "CLEAR_QUERY" }); // Clear the query after clicking a search result
+        dispatch({ type: "CLEAR_QUERY" }); 
     };
 
     return (
@@ -122,7 +120,6 @@ export default function Search() {
                     </motion.div>
                 )}
 
-                {/* Search Results */}
                 {results && !error && !isLoading && isDropdownVisible && (
                     <motion.div
                         id="searchResults"
@@ -137,7 +134,7 @@ export default function Search() {
                                 <motion.li
                                     onClick={() => handleResultClick(movie.id)}
                                     key={movie.id}
-                                    className="px-4 py-2 text-yellow-500 font-semibold cursor-pointer hover:shadow-sm hover:bg-yellow-600 hover:text-white font-nunito text-sm font-normal"
+                                    className="px-4 py-2 text-yellow-500 cursor-pointer hover:shadow-sm hover:bg-yellow-600 hover:text-white font-nunito text-sm font-normal"
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 10 }}

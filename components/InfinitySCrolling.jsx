@@ -77,10 +77,24 @@ export default function InfiniteScrollWrapper({
     }, [ initialData, query ] );
 
     return (
+
         <>
-            { items.length === 0 && !loading && (
-                <p className="text-center text-red-700 font-lato">No items available.</p>
+            { loading &&
+                (
+                    <div className="w-full h-full flex items-center justify-center">
+                        <span className="loaderScrolling"></span>
+                    </div>
+                ) }
+            { noMoreItems && items.length > 0 && (
+                <p className="text-center text-red-700 font-lato">You have all caught up!!</p>
             ) }
+            { items.length === 0 && !loading && (
+                <div className="text-center w-full  flex flex-col gap-5 items-center justify-center text-red-700 font-lato">
+                    <span className="notFoundLoader"></span>
+                    <p>No items available.</p>
+                </div>
+            ) }
+        
             <div
                 id="itemsContainer"
                 className={ `${MovieCard ? 'flex flex-nowrap space-x-4 overflow-x-auto' : 'grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto'
@@ -88,6 +102,7 @@ export default function InfiniteScrollWrapper({
                 onScroll={ handleScroll }
                 style={ MovieCard ? { maxHeight: "80vh", overflowX: "auto" } : { maxHeight: "80vh" } }
             >
+            
                 { items.map( ( item, index ) => (
                     <div key={ index }>
                         { MovieCard ? (
@@ -98,14 +113,6 @@ export default function InfiniteScrollWrapper({
                     </div>
                 ) ) }
             </div>
-            { loading && (
-                <div className="w-full h-full flex items-center justify-center">
-                    <span className="loaderScrolling"></span>
-                </div>
-            ) }
-            { noMoreItems && (
-                <p className="text-center text-red-700 font-lato">You have all caught up!!</p>
-            ) }
         </>
     );
 };

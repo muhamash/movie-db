@@ -27,39 +27,50 @@ export const getNowPlayingMovie = async () =>
     }
 };
 
-export const getMovieList = async (page, types) => {
+export const getMovieList = async ( page, types, movieId ) =>
+{
     let url = '';
 
-    if (types === 'trending') {
+    if ( types === 'trending' )
+    {
         url = `https://api.themoviedb.org/3/trending/movie/day?language=en-US&page=${page}`;
-    } else if (types === 'top_rated') {
+    } else if ( types === 'top_rated' )
+    {
         url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`;
-    } else if (types === 'popular') {
+    } else if ( types === 'popular' )
+    {
         url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`;
-    } else {
-        throw new Error('Invalid movie type');
+    } else if ( types === 'similar' && movieId )
+    {
+        url = `https://api.themoviedb.org/3/movie/${movieId}/similar?language=en-US&page=${page}`;
+    } else
+    {
+        throw new Error( 'Invalid movie type' );
     }
 
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNzgxODZhMjA2NjY3N2M2NzQwMzFmMWQ2ZGNiMzljNCIsIm5iZiI6MTczNDI5ODA3OS42NzYsInN1YiI6IjY3NWY0OWRmZjc0YzNhMTM4OGJhMjIzYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vSW8VAinEvzEMpxcGOGAIZb4Wo70KMlfktbWImpv5LI'
-        }
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNzgxODZhMjA2NjY3N2M2NzQwMzFmMWQ2ZGNiMzljNCIsIm5iZiI6MTczNDI5ODA3OS42NzYsInN1YiI6IjY3NWY0OWRmZjc0YzNhMTM4OGJhMjIzYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vSW8VAinEvzEMpxcGOGAIZb4Wo70KMlfktbWImpv5LI',
+        },
     };
 
-    try {
-        const res = await fetch(url, options);
+    try
+    {
+        const res = await fetch( url, options );
 
-        if (!res.ok) {
-            throw new Error(`Error: ${res.statusText}`);
+        if ( !res.ok )
+        {
+            throw new Error( `Error: ${res.statusText}` );
         }
 
-        const data = await res.json(); 
-        // console.log(data)
-        return { data, error: null }; 
-    } catch (err) {
-        console.error('Error fetching movie list:', err);
+        const data = await res.json();
+        // console.log( data, movieId );
+        return { data, error: null };
+    } catch ( err )
+    {
+        console.error( 'Error fetching movie list:', err );
         return { data: null, error: err.message || 'An unknown error occurred' };
     }
 };

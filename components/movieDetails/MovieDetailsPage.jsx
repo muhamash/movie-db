@@ -1,4 +1,4 @@
-import { getCast, getMovieById, getSimMovie } from "@/utils/getMovie";
+import { getCast, getMovieById, getMovieList } from "@/utils/getMovie";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import MovieDetails from "./MovieDetails";
@@ -7,7 +7,7 @@ import YouLike from "./YouLike";
 export default async function MovieDetailsPage ( { id, userId } )
 {    
     const  movieDataById  = getMovieById( id );
-    const simMoviePromise = getSimMovie( id );
+    const simMoviePromise = getMovieList( 1, "similar", id );
     const castPromise = getCast( id );
 
     const movieData = await movieDataById;
@@ -15,7 +15,7 @@ export default async function MovieDetailsPage ( { id, userId } )
     if( movieData === undefined || movieData.error  || !movieData?.movieDataById )  {
         return notFound();
     }
-    // console.log(movieData?.movieDataById)
+    // console.log(simMoviePromise.data)
     return (
         <>
             <MovieDetails castData={ castPromise } movieData={ movieData?.movieDataById } userId={userId} movieId={id} />
@@ -36,7 +36,7 @@ export default async function MovieDetailsPage ( { id, userId } )
                     </div>
                 </div>
             }>
-                <YouLike data={ simMoviePromise } />
+                <YouLike movieId={id} data={ simMoviePromise } />
             </Suspense>
         </>
     );

@@ -6,7 +6,8 @@ export async function GET(request, context) {
         // console.log( request, context );
         const page = url.searchParams.get( "page" );
         const id = url.searchParams.get( "id" );
-        // console.log(id)
+        const movieId = url.searchParams.get( "movieId" );
+        // console.log(movieId)
 
         if (!page || isNaN(page) || parseInt(page, 10) <= 0) {
             return new Response(
@@ -24,7 +25,7 @@ export async function GET(request, context) {
             );
         }
 
-        const { data, error } = await getMovieList( page, id );
+        const { data, error } = await getMovieList( page, id, movieId );
         // console.log( popularMoviesData );
 
         if (error || !data) {

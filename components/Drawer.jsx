@@ -23,7 +23,7 @@ export default function Drawer() {
                 onClick={ toggleDrawer }
                 className="text-white p-2 rounded focus:outline-none hover:bg-cyan-800"
             >
-                { isOpen ? <FiX size={ 24 } /> : <FiMenu size={ 24 } /> }
+                { isOpen && <FiX size={ 24 } />  }
             </button>
 
             {/* Drawer Content */ }

@@ -21,7 +21,7 @@ export default function WatchListLink ()
     };
 
     return (
-        <p onClick={handleLink} className="text-white hover:text-gray-300 font-nunito cursor-pointer">
+        <p onClick={handleLink} className="text-white hover:text-gray-300 font-nunito cursor-pointer  hover:scale-110 duration-200 transition">
               Watch Later
             </p>
     );

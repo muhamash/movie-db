@@ -18,7 +18,7 @@ export default async function Nav() {
         
         <div className="hidden  md:flex items-center">
           <div className="ml-8 flex space-x-4">
-            <Link href="/compare" className="text-white hover:text-gray-300 font-nunito">
+            <Link href="/compare" className="text-white hover:text-gray-300 font-nunito  hover:scale-110 duration-200 transition">
               Compare Movies
             </Link>
             <WatchListLink />

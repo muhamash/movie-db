@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 // import MovieDetails from "./MovieDetails";
 import dynamic from "next/dynamic";
-import YouLike from "./YouLike";
+// import YouLike from "./YouLike";
 
 const MovieDetails = dynamic( () => import( "./MovieDetails" ) );
+const YouLike = dynamic( () => import( "./YouLike" ) );
 
 export default async function MovieDetailsPage ( { id, userId } )
 {    

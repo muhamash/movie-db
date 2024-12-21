@@ -11,7 +11,7 @@ export default async function WatchList({ id }) {
     let movieData = [];
 
     try {
-        const response = await fetch(`http://localhost:3000/api/whiteList?userId=${id}`, {
+        const response = await fetch(`/api/whiteList?userId=${id}`, {
             cache: "no-store",
         });
 
@@ -28,9 +28,6 @@ export default async function WatchList({ id }) {
     } catch (error) {
         console.error('Error fetching data:', error);
     }
-
-    // console.log(movieData);
-    // console.log(data);
 
     return (
         <div className="container mx-auto pt-24 pb-8">

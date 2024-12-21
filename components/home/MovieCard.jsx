@@ -27,14 +27,14 @@ export default function MovieCard({ isTrend, movie }, ref) {
   };
 
   return (
-    <div className="relative flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform px-1 overflow-hidden">
+    <div onClick={ onClick } className="relative flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform px-1 overflow-hidden">
       {
         isPending ? (
           <div className='w-full h-full flex items-center justify-center'>
             <div className='cardLoader'></div>
           </div>
         ) : (
-          <div onClick={ onClick }>
+          <>
             {
               !isImageLoaded && (
                 <Skeleton />
@@ -62,7 +62,7 @@ export default function MovieCard({ isTrend, movie }, ref) {
                 </p>
               </div>
             ) }
-          </div>
+          </>
         )
       }
     </div>

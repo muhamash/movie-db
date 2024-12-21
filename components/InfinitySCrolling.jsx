@@ -107,8 +107,8 @@ export default function InfiniteScrollWrapper({
         ) }
       </div>
 
-      { noMoreItems && items.length > 0 && page > 2 && (
-          <p className="text-center text-red-700 font-lato w-[90%] mx-auto p-3">You have all caught up!!</p>
+      { noMoreItems && items.length > 0 && page > 1 && (
+          <p className="text-center text-yellow-500 font-semibold text-lg font-lato w-[90%] mx-auto p-3">You have all caught up!!</p>
       ) }
       
       { items.length === 0 && !loading && (

@@ -11,7 +11,7 @@ export default async function WatchList({ id }) {
     let movieData = [];
 
     try {
-        const response = await fetch(`https://movie-db-eight-sable.vercel.app/api/whiteList?userId=${id}`, {
+        const response = await fetch(`http://localhost:3000/api/whiteList?userId=${id}`, {
             cache: "no-store",
         });
 
@@ -21,7 +21,7 @@ export default async function WatchList({ id }) {
 
         data = await response.json();
 
-        console.log( data );
+        // console.log( data );
         if (data?.data?.length > 0) {
             const moviePromises = data.data.map(movieId => getMovieById(movieId));
             movieData = await Promise.all(moviePromises);
@@ -42,7 +42,7 @@ export default async function WatchList({ id }) {
             <Suspense fallback={ <div className="animate-pulse w-full h-[288px] bg-zinc-800 rounded-lg" /> }>
                 <div id="watchLaterList" className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     { movieData.length > 0 && movieData.map( ( movie, index ) => (
-                        <Template key={ index } movie={ movie.movieDataById } />
+                        <Template key={ index } userId={id} movie={ movie.movieDataById } />
                     ) ) }
                 </div>
             </Suspense>

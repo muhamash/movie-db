@@ -1,6 +1,7 @@
 'use server'
 
 import { revalidateTag } from 'next/cache';
+
 const { updateWhiteList } = require( "@/db/queries" );
 
 export async function addWhiteList(userId, movieId) {

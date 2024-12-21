@@ -1,14 +1,18 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Fragment, useEffect, useState } from "react";
+// import MovieCard from "./home/MovieCard";
+// import SearchedCard from "./search/SearchedCard";
+
+const MovieCard = dynamic( () => import( "./home/MovieCard" ) );
+const SearchedCard = dynamic( () => import( "./search/SearchedCard" ) );
 
 export default function InfiniteScrollWrapper({
   initialData,
   type,
   isTrend,
-  MovieCard,
   query,
-    SearchedCard,
   movieId
 }) {
   const [items, setItems] = useState(initialData?.results || []);

@@ -16,6 +16,11 @@
   font-family: 'Dancing Script', cursive;
 }
 
+@keyframes shimmer {
+  100% {
+    background-position: -200% 0;
+  }
+}
 
 /* :root {
   --background: #ffffff;

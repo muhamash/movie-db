@@ -1,4 +1,5 @@
 import { ImageResponse } from '@vercel/og';
+import Image from 'next/image';
 
 export const runtime = "edge"
 export const dynamicParams = true
@@ -33,7 +34,7 @@ export async function GET(req) {
         }}
       >
         {coverUrl && (
-          <img
+          <Image
             src={coverUrl}
             alt="cover image"
             style={{

@@ -6,12 +6,6 @@ const nextConfig = {
     domains: ['facebook.com', 'x.com', 'linkedin.com', 'image.tmdb.org'],
     formats: ['image/avif', 'image/webp'],
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback.fs = false;
-    }
-    return config;
-  },
 };
 
 export default nextConfig;

@@ -1,7 +1,11 @@
 import Image from "next/image";
-import Cast from "./Cast";
+// import Cast from "./Cast";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import HandleWhiteListServer from "./HandleWhiteListServer";
 import ShareButtons from "./ShareButtons";
+
+const Cast = dynamic( () => import( "./Cast" ) );
 
 export default async function MovieDetails ( { movieData, castData, userId, movieId } )
 {
@@ -69,7 +73,11 @@ export default async function MovieDetails ( { movieData, castData, userId, movi
                             </div>
 
                             {/* Cast */ }
-                            <Cast cast={ castData } />
+                            <Suspense fallback={
+                                <p>loadinggg</p>
+                            }>
+                                <Cast cast={ castData } />
+                            </Suspense>
 
                             {/* Actions */ }
                             <HandleWhiteListServer userId={ userId } movieId={ movieId } />

@@ -1,28 +1,37 @@
 'use client';
 
 import { useAuth } from '@/hooks/useAuth';
+import { handleWatchListClick } from '@/utils/actions/serverActions';
 import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 
 export default function WatchListLink ()
 {
+    const [isPending, startTransition] = useTransition();
     const { auth } = useAuth();
     const router = useRouter();
 
-    const handleLink = () =>
+    async function handleLink()
     {
-        if ( !auth )
+        startTransition( async () =>
         {
-            router.push( "/login" );
-        }
-        else
-        {
-            router.push( `/watchList/${auth?.id}` );
-        }
+            const redirectUrl = await handleWatchListClick( auth?.id );
+            router.push( redirectUrl );
+        } );
     };
 
     return (
-        <p onClick={handleLink} className="text-white hover:text-gray-300 font-nunito cursor-pointer  hover:scale-110 duration-200 transition">
-              Watch Later
-            </p>
-    );
-};
+        ( isPending ? (
+            <div>
+                loading...
+            </div>
+        ) :
+            (
+                <p onClick={ handleLink } className="text-white hover:text-gray-300 font-nunito cursor-pointer  hover:scale-110 duration-200 transition">
+                    Watch Later
+                </p>
+            )
+        )
+    )
+}   
+

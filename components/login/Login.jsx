@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import { performLogin } from '@/utils/actions/formAction';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -84,7 +85,7 @@ export default function Login() {
 
                 <div className="mt-6 font-manrope text-moviedb-gray">
                     New to moviedb?
-                    <a href="#" className="text-white hover:underline font-manrope px-2">Sign up now</a>
+                    <Link href="/registration" className="text-white hover:underline font-manrope px-2">Sign up now</Link>
                 </div>
             </div>
         </div>

@@ -25,7 +25,6 @@ export default async function HandleWhiteListServer({ userId, movieId }) {
             console.error('Error fetching data:', error);
         }
     }
-
     // const isInterested = data?.success && data?.data?.includes(movieId);
 
     return (

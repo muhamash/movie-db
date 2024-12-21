@@ -11,7 +11,7 @@ export default async function WatchList({ id }) {
     let movieData = [];
 
     try {
-        const response = await fetch(`http://localhost:3000/api/whiteList?userId=${id}`, {
+        const response = await fetch(`https://movie-db-eight-sable.vercel.app/api/whiteList?userId=${id}`, {
             cache: "no-store",
         });
 

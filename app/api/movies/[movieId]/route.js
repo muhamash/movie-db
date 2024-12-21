@@ -3,12 +3,12 @@ import { getMovieList } from "@/utils/getMovie";
 export async function GET(request, context) {
     try {
         const url = new URL( request.url );
-        // console.log( request, context );
+        // console.log( request.url, context );
         const page = url.searchParams.get( "page" );
         const id = url.searchParams.get( "id" );
-        const movieId = url.searchParams.get( "movieId" );
-        // console.log(movieId)
+        const movieId = context?.params?.movieId;
 
+        // console.log(movieId)
         if (!page || isNaN(page) || parseInt(page, 10) <= 0) {
             return new Response(
                 JSON.stringify({

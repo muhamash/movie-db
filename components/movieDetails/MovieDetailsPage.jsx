@@ -21,13 +21,15 @@ export default async function MovieDetailsPage ( { id, userId } )
     }
     // console.log(simMoviePromise.data)
     return (
-        <>
+        <Suspense fallback={
+            <p>loadingg</p>
+        }>
             <MovieDetails castData={ castPromise } movieData={ movieData?.movieDataById } userId={userId} movieId={id} />
             <Suspense fallback={
                 <p>loadinggg</p>
             }>
                 <YouLike movieId={id} data={ simMoviePromise } />
             </Suspense>
-        </>
+        </Suspense>
     );
 }

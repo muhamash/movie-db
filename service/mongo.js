@@ -24,7 +24,7 @@ export async function dbConnect() {
         cached.promise = undefined;
         throw e;
     }
+    
     console.log( "connected");
     return cached.connection;
 }
-// export default connectMongo;

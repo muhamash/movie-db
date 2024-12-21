@@ -7,7 +7,7 @@ export async function generateMetadata(params) {
   
   return {
     title: movieInfo?.movieDataById?.original_title,
-    description: movieInfo?.movieDataById?.original_title,
+    description: movieInfo?.movieDataById?.overview,
     openGraph: {
       images:
       {

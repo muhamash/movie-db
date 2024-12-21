@@ -1,9 +1,9 @@
 "use client";
-
 import { useAuth } from "@/hooks/useAuth";
 import { addWhiteList } from "@/utils/actions/whiteListAction";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function HandleWhiteListClient({ id, initialInterested }) {
     const [interested, setInterested] = useState(initialInterested);
@@ -23,9 +23,11 @@ export default function HandleWhiteListClient({ id, initialInterested }) {
             try
             {
                 await addWhiteList( String( auth?.id ), id );
+                toast.success('Successfully added the item!')
                 setInterested( !interested );
             } catch ( error )
             {
+                toast.error(`This didn't work: ${error}`)
                 console.error( "Error updating whitelist:", error );
             }
         }
@@ -81,6 +83,7 @@ export default function HandleWhiteListClient({ id, initialInterested }) {
                     }
                 </button>
             </div>
+            <Toaster />
         </div>
     );
 }

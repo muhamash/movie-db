@@ -1,10 +1,10 @@
 'use client'
-
 import { useAuth } from '@/hooks/useAuth';
 import { performLogin } from '@/utils/actions/formAction';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Login() {
     const [error, setError] = useState("");
@@ -24,17 +24,22 @@ export default function Login() {
 
             if ( found )
             {
+                toast.success( 'Great!! enjoy' );
                 setAuth( found );
                 router.push('/');
-            } else {
+            } else
+            {
+                toast.error('Login failed')
                 setError('Please provide valid login credentials.');
             }
-        } catch (err) {
+        } catch ( err )
+        {
+            toast.error(err.message || 'An unexpected error occurred.')
             setError(err.message || 'An unexpected error occurred.');
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     return (
         <div className="w-full max-w-md bg-black/70 rounded-lg p-8 shadow-xl">
@@ -88,6 +93,7 @@ export default function Login() {
                     <Link href="/registration" className="text-white hover:underline font-manrope px-2">Sign up now</Link>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 }

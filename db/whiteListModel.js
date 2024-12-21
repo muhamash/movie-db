@@ -14,4 +14,4 @@ const whiteListSchema = new mongoose.Schema(
     }
 );
 
-export const whiteListModel = mongoose?.models?.whiteLists ?? mongoose.model( "whiteLists", whiteListSchema );
+export const whiteListModel = mongoose?.models?.whitelists ?? mongoose.model( "whitelists", whiteListSchema );

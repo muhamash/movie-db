@@ -2,12 +2,17 @@ import { replaceMongoIdInObject } from "@/utils/mongoUsers";
 import mongoose from "mongoose";
 import { userModel } from "./usersModel";
 import { whiteListModel } from "./whiteListModel";
+import { dbConnect } from "@/service/mongo";
 
-export async function createUser(user) {
+export async function createUser ( user )
+{
+    await dbConnect();
     return await userModel.create(user);
 }
 
-export async function findUserByCredentials(credentials) {
+export async function findUserByCredentials ( credentials )
+{
+    await dbConnect();
     const user = await userModel.findOne(credentials).lean();
     if (user) {
         return replaceMongoIdInObject(user);
@@ -15,7 +20,10 @@ export async function findUserByCredentials(credentials) {
     return null;
 }
 
-export async function updateWhiteList(userId, movieId) {
+export async function updateWhiteList ( userId, movieId )
+{
+    await dbConnect();
+
     try {
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             throw new Error("Invalid userId");
@@ -23,24 +31,19 @@ export async function updateWhiteList(userId, movieId) {
 
         const objectId = new mongoose.Types.ObjectId(userId);
 
-        // Fetch twhitelist entry
         const whiteListEntry = await whiteListModel.findOne({ userId: objectId });
 
         if (whiteListEntry) {
-            // Check  the movieId -> in the movieIds array
             const movieIndex = whiteListEntry.movieIds.indexOf(movieId);
 
             if (movieIndex > -1) {
-                // If movieId exists then remove it
                 whiteListEntry.movieIds.splice(movieIndex, 1);
             } else {
-                // If movieId doesn't exist then add it
                 whiteListEntry.movieIds.push(movieId);
             }
 
             await whiteListEntry.save();
         } else {
-            // If no whitelist exists  then create one with the movieId
             await whiteListModel.create({
                 userId: objectId,
                 movieIds: [movieId],

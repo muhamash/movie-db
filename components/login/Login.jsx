@@ -81,10 +81,10 @@ export default function Login() {
                 </form>
 
                 <div className="mt-4 flex justify-between text-moviedb-gray text-sm">
-                    <label className="flex items-center font-manrope text-slate-400">
+                    {/* <label className="flex items-center font-manrope text-slate-400">
                         <input type="checkbox" className="mr-2" />
                         Remember me
-                    </label>
+                    </label> */}
                     <a href="#" className="hover:underline text-slate-400 font-manrope">Need help?</a>
                 </div>
 

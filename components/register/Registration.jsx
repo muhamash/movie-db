@@ -28,7 +28,7 @@ export default function Registration() {
             }
         } catch ( error )
         {
-            setFormState( { success: false, error: "An unexpected error occurred. Please try again later." } );
+            setFormState( { success: false, error: error } );
             console.error( "Registration error:", error );
         }
         finally

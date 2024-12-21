@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 
-export default function MovieCard({ isTrend, movie }) {
+export default function MovieCard({ isTrend, movie }, ref) {
   const { auth } = useAuth();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -33,7 +33,7 @@ export default function MovieCard({ isTrend, movie }) {
               src={
                 movie?.poster_path
                   ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
-                  : '/default-poster.jpg'
+                  : '/star.svg'
               }
               alt={ movie?.original_title || 'Movie Poster' }
               className="w-full rounded-lg"

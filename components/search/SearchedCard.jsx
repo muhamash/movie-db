@@ -65,7 +65,7 @@ export default function SearchedCard({ movie }) {
                             <h3 className="font-bold mb-2">{ movie?.original_title }</h3>
                             <div className="flex justify-between text-sm text-gray-400">
                                 <span className='font-nunito'>{ formatDate( movie?.release_date ) || null }</span>
-                                <span className='font-manrope'>⭐ { movie?.vote_average.toFixed( 1 ) }</span>
+                                <span className='font-manrope'>⭐ { movie?.vote_average?.toFixed( 1 ) }</span>
                             </div>
                         </div>
                     </div>

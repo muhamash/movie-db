@@ -1,8 +1,6 @@
 import { getMovieList } from "@/utils/getMovie";
-// import InfiniteScrollWrapper from "../InfinitySCrolling";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-// import MovieCard from "./MovieCard";
 
 const InfiniteScrollWrapper = dynamic( () => import( '../InfinitySCrolling' ) );
 

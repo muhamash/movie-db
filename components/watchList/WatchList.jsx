@@ -11,16 +11,17 @@ export default async function WatchList({ id }) {
     let movieData = [];
 
     try {
-        const response = await fetch(`/api/whiteList?userId=${id}`, {
+        const response = await fetch(`https://movie-db-eight-sable.vercel.app/api/whiteList?userId=${id}`, {
             cache: "no-store",
         });
 
         if (!response.ok) {
-            throw new Error(`not found! status: ${response.status}`);
+            throw new Error(`not found! status: ${response.message}`);
         }
 
         data = await response.json();
 
+        console.log( data );
         if (data?.data?.length > 0) {
             const moviePromises = data.data.map(movieId => getMovieById(movieId));
             movieData = await Promise.all(moviePromises);

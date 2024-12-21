@@ -19,7 +19,7 @@ export async function GET(request, { params }) {
     }
 
     try {
-        const whitelist = await whiteListModel.findOne({ userId }).lean();
+        const whitelist = await whiteListModel.findOne({ userId });
 
         if (!whitelist) {
             return new Response(

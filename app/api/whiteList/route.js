@@ -1,4 +1,5 @@
 import { whiteListModel } from "@/db/whiteListModel";
+import { dbConnect } from "@/service/mongo";
 
 export const dynamic = 'force-dynamic';
 export const revalidate = true
@@ -18,7 +19,10 @@ export async function GET(request, { params }) {
         );
     }
 
-    try {
+    try
+    {
+        await dbConnect();
+        
         const whitelist = await whiteListModel.findOne({ userId });
 
         if (!whitelist) {

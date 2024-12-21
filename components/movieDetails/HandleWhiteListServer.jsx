@@ -16,6 +16,7 @@ export default async function HandleWhiteListServer({ userId, movieId }) {
             }
 
             data = await response.json();
+            console.log( data );
             if (data?.success && data?.data?.some(movie => movie === movieId)) {
                 isInterested = true;
                 console.log(isInterested)

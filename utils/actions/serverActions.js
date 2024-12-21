@@ -1,9 +1,18 @@
 'use server';
 
-export async function handleMovieClick( movieId, auth ) {
-  // return `/movie/${movieId}?userId=${auth?.id === undefined ? 'notLoggedIn' : auth?.id}`;
-
-  return `https://movie-db-eight-sable.vercel.app/movie/${movieId}?userId=${auth?.id === undefined ? 'notLoggedIn' : auth?.id}`;
+export async function handleMovieClick(movieId, auth) {
+    try 
+    {
+      if ( !movieId ) throw new Error( "Movie ID is required." );
+      const userId = auth?.id ?? 'notLoggedIn';
+      const redirectUrl = `https://movie-db-eight-sable.vercel.app/movie/${movieId}?userId=${userId}`;
+      
+      return redirectUrl;
+      
+    } catch (error) {
+        console.error("Error in handleMovieClick:", error);
+        // return `/error?message=${encodeURIComponent("Failed to redirect to the movie page.")}`;
+    }
 };
 
 export async function handleWatchListClick ( userId )

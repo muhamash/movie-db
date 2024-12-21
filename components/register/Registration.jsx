@@ -5,11 +5,13 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Registration() {
-    const [formState, setFormState] = useState({ success: false, error: null });
+    const [ formState, setFormState ] = useState( { success: false, error: null } );
+    const [loading, setLoading] = useState(false); 
 
     const handleSubmit = async ( event ) =>
     {
         event.preventDefault();
+        setLoading(true); 
         const formData = new FormData( event.target );
 
         try
@@ -28,6 +30,10 @@ export default function Registration() {
         {
             setFormState( { success: false, error: "An unexpected error occurred. Please try again later." } );
             console.error( "Registration error:", error );
+        }
+        finally
+        {
+            setLoading(false);
         }
     };
 
@@ -93,13 +99,13 @@ export default function Registration() {
                         type="submit"
                         className="w-full hover:scale-90 font-manrope bg-moviedb-red text-white py-3 rounded hover:bg-red-700 duration-200 transition-transform"
                     >
-                        Sign Up
+                        {loading ? 'Signing Up...' : 'Sign Up'}
                     </button>
                 </form>
 
                 <div className="mt-6 text-moviedb-gray font-manrope">
                     Already have an account?
-                    <Link href="#" className="text-white hover:underline font-manrope px-2">Sign in</Link>
+                    <Link href="/login" className="text-white hover:underline font-manrope px-2">Sign in</Link>
                 </div>
             </div>
         </div>

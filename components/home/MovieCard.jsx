@@ -15,12 +15,20 @@ export default function MovieCard({ isTrend, movie }, ref) {
   const [isPending, startTransition] = useTransition();
   const [isImageLoaded, setImageLoaded] = useState(false);
 
-  async function onClick() {
-    startTransition(async () => {
-      const redirectUrl = await handleMovieClick(movie?.id, auth);
-      router.push(redirectUrl);
-    });
-  }
+ async function onClick() {
+   startTransition( async () =>
+   {
+     try
+     {
+       const redirectUrl = await handleMovieClick( movie?.id, auth );
+       router.push( redirectUrl );
+     } catch ( error )
+     {
+       console.error( "Failed to handle movie click:", error );
+       alert( "An error occurred while navigating to the movie page. Please try again." );
+     }
+   } );
+  };
 
   const handleImageLoad = () => {
     setImageLoaded(true);

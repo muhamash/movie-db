@@ -20,9 +20,9 @@ import
         WhatsappShareButton,
     } from 'react-share';
 
-export default function ShareButtons({ title, description, image }) {
+export default function ShareButtons({ title, description,image , userId }) {
     const pathname = usePathname();
-    const url = `https://movie-db-eight-sable.vercel.app${pathname}`;
+    const url = `https://movie-db-eight-sable.vercel.app${pathname}?userId=${userId ?? "notLoggedIn"}`;
 
     const ogImageUrl = `https://movie-db-eight-sable.vercel.app/api/og?title=${encodeURIComponent(
         title

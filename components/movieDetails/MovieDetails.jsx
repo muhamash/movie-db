@@ -83,7 +83,7 @@ export default async function MovieDetails ( { movieData, castData, userId, movi
                             <HandleWhiteListServer userId={ userId } movieId={ movieId } />
 
                             {/* Share Buttons */ }
-                            <ShareButtons title={ title } description={ description } image={ image } userId={ userId } />
+                            <ShareButtons movieId={movieId} userId={ userId } />
                         </div>
                     </div>
                 </div>

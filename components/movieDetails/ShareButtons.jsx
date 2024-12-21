@@ -1,6 +1,5 @@
 'use client';
 
-// import { usePathname } from 'next/navigation';
 import
     {
         FacebookIcon,
@@ -14,11 +13,10 @@ import
     } from 'react-share';
 
 export default function ShareButtons({  userId, movieId }) {
-    // const pathname = usePathname();
+
     const url = `https://movie-db-eight-sable.vercel.app/movie/${movieId}?userId=${userId ?? "notLoggedIn"}`;
 
     // console.log( url );
-
     return (
         <div className="share-buttons mb-6">
             <h3 className="text-gray-400 mb-2">Share on social media</h3>

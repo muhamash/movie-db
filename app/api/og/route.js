@@ -17,8 +17,7 @@ export async function GET(req) {
       cover
     )}&w=1200&q=75`;
 
-  console.log( coverUrl, title, description );
-
+  // console.log( coverUrl, title, description );
   return new ImageResponse(
     (
       <div

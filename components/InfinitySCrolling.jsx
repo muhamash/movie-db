@@ -85,7 +85,7 @@ export default function InfiniteScrollWrapper({
         id="itemsContainer"
         className={ `${type
           ? "flex flex-nowrap space-x-4 overflow-x-auto"
-          : "grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto w-full px-2"
+          : "grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto w-full p-3"
           } p-2` }
         onScroll={ handleScroll }
         style={ { maxHeight: "80vh", ...( type ? { overflowX: "auto" } : {} ) } }
@@ -107,7 +107,7 @@ export default function InfiniteScrollWrapper({
         ) }
       </div>
 
-      { noMoreItems && items.length > 0 && (
+      { noMoreItems && items.length > 0 && page > 2 && (
           <p className="text-center text-red-700 font-lato w-[90%] mx-auto p-3">You have all caught up!!</p>
       ) }
       

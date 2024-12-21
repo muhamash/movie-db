@@ -2,45 +2,55 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import { handleMovieClick } from '@/utils/actions/serverActions';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
+
+const Skeleton = dynamic( () => import( '../Skeleton' ), { ssr: true } );
 
 export default function MovieCard({ isTrend, movie }, ref) {
   const { auth } = useAuth();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const [isImageLoaded, setImageLoaded] = useState(false);
 
-  async function onClick()
-  {
-    startTransition( async () =>
-    {
-      const redirectUrl = await handleMovieClick( movie?.id, auth );
-      router.push( redirectUrl );
-    } );
+  async function onClick() {
+    startTransition(async () => {
+      const redirectUrl = await handleMovieClick(movie?.id, auth);
+      router.push(redirectUrl);
+    });
+  }
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
   };
 
   return (
-    <div className="flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform">
+    <div className="relative flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform px-1 overflow-hidden">
       {
         isPending ? (
-          <p>
-            loading...
-          </p>
+          <div className='w-full h-full flex items-center justify-center'>
+            <div className='cardLoader'></div>
+          </div>
         ) : (
           <div onClick={ onClick }>
+            {
+              !isImageLoaded && (
+                <Skeleton />
+              )
+            }
             <Image
               src={
                 movie?.poster_path
                   ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
-                  : '/star.svg'
+                  : '/assets/icons/commingSoon.svg'
               }
               alt={ movie?.original_title || 'Movie Poster' }
-              className="w-full rounded-lg"
-              width={ 500 }
-              height={ 750 }
-              placeholder="blur"
-              blurDataURL="data:image/webp;base64,..."
+              className={ `w-full object-cover rounded-lg transition-opacity ${isImageLoaded ? 'opacity-100' : 'opacity-0'}` }
+              width={ 480 }
+              height={ 720 }
+              onLoad={ handleImageLoad }
             />
             { isTrend && (
               <div className="mt-2">

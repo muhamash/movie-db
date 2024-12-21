@@ -11,7 +11,7 @@ export default async function YouLike ( { data, movieId } )
     
     return (
         <Suspense fallback={ <div className="animate-pulse w-full h-[288px] bg-zinc-800 rounded-lg" /> }>
-            <div className='container mx-auto px-4 py-8'>
+            <div className='container mx-auto px-4 py-8  md:translate-y-0 translate-y-[800px]'>
                 <h2 className="text-2xl font-bold mb-4">More Like This</h2>
                 <div className="flex flex-nowrap space-x-4 overflow-x-auto pb-4">
                     {/* {

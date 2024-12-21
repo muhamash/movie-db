@@ -233,3 +233,50 @@ body {
     opacity: 0;
   }
 }
+
+/* cardlaoder */
+.cardLoader {
+      width: 64px;
+      height: 64px;
+      position: relative;
+      background: #6c477d;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .cardLoader:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40px;
+      height: 40px;
+      transform: rotate(45deg) translate(30%, 40%);
+      background: #a2aa01;
+      box-shadow: 32px -34px 0 5px #035d69;
+      animation: cardLoaderslide 2s infinite ease-in-out alternate;
+    }
+    .cardLoader:after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #058c54;
+      transform: rotate(0deg);
+      transform-origin: 35px 145px;
+      animation: cardLoaderrotate 2s infinite ease-in-out;
+    }
+
+    @keyframes cardLoaderslide {
+      0% , 100%{ bottom: -35px}
+      25% , 75%{ bottom: -2px}
+      20% , 80%{ bottom: 2px}
+    }
+    @keyframes cardLoaderrotate {
+      0% { transform: rotate(-15deg)}
+      25% , 75%{ transform: rotate(0deg)}
+      100% {  transform: rotate(25deg)}
+    }
+  

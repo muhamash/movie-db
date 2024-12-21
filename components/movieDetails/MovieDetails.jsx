@@ -33,13 +33,13 @@ export default async function MovieDetails ( { movieData, castData, userId, movi
                 <div className="container md:relative mx-auto px-4 pt-32">
                     <div className="flex flex-col md:flex-row gap-8">
                         {/* Movie Poster */ }
-                        <div className="md:w-1/3 relative hover:scale-110 duration-200 transition-all hover:border-[0.5px] border-green-700 rounded-md cursor-pointer hover:shadow-md hover:shadow-slate-500">
+                        <div className="md:w-1/3 relative hover:scale-110 duration-200 transition-all rounded-md cursor-pointer">
                             <Image
                                 width={ 400 }
                                 height={ 300 }
                                 src={ image }
                                 alt="Smile 2 Poster"
-                                className="w-full rounded-lg shadow-lg"
+                                className="w-full md:h-full aspect-auto rounded-lg shadow-lg object-cover"
                             />
                         </div>
 

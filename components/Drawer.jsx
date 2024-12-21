@@ -21,9 +21,9 @@ export default function Drawer() {
         <div className="relative block md:hidden">
             <button
                 onClick={ toggleDrawer }
-                className="text-white p-2 rounded focus:outline-none hover:bg-cyan-800"
+                className="text-white p-2  focus:outline-none hover:bg-cyan-800 rounded-sm"
             >
-                { isOpen && <FiX size={ 24 } />  }
+                {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
 
             {/* Drawer Content */ }

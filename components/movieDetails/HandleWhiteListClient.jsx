@@ -17,17 +17,23 @@ export default function HandleWhiteListClient({ id, initialInterested }) {
         {
             router.push( "/login" );
             return;
-        }
-        else
+        } else
         {
             try
             {
-                await addWhiteList( String( auth?.id ), id );
-                toast.success('Successfully added the item!')
-                setInterested( !interested );
+                const response = await addWhiteList( String( auth?.id ), id );
+                if ( response.success )
+                {
+                    setInterested( !interested );
+
+                    toast.success( response?.message );
+                } else
+                {
+                    toast.error( "Failed to update your watch list." );
+                }
             } catch ( error )
             {
-                toast.error(`This didn't work: ${error}`)
+                toast.error( "An unexpected error occurred. Please try again." );
                 console.error( "Error updating whitelist:", error );
             }
         }

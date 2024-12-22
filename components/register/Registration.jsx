@@ -110,7 +110,11 @@ export default function Registration() {
 
                     <button
                         type="submit"
-                        className="w-full hover:scale-90 font-manrope bg-moviedb-red text-white py-3 rounded hover:bg-red-700 duration-200 transition-transform"
+                        className={`w-full font-manrope py-3 rounded duration-200 transition-transform ${
+                            loading 
+                                ? 'bg-gray-500 cursor-not-allowed' 
+                                : 'bg-moviedb-red text-white hover:scale-90 hover:bg-red-700'
+                        }`}
                     >
                         {loading ? 'Signing Up...' : 'Sign Up'}
                     </button>

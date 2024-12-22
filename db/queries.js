@@ -1,8 +1,8 @@
+import { dbConnect } from "@/service/mongo";
 import { replaceMongoIdInObject } from "@/utils/mongoUsers";
 import mongoose from "mongoose";
 import { userModel } from "./usersModel";
 import { whiteListModel } from "./whiteListModel";
-import { dbConnect } from "@/service/mongo";
 
 export async function createUser ( user )
 {
@@ -21,8 +21,7 @@ export async function findUserByCredentials ( credentials )
     return null;
 }
 
-export async function updateWhiteList ( userId, movieId )
-{
+export async function updateWhiteList(userId, movieId) {
     await dbConnect();
 
     try {
@@ -34,30 +33,37 @@ export async function updateWhiteList ( userId, movieId )
 
         const whiteListEntry = await whiteListModel.findOne({ userId: objectId });
 
+        let action;
         if (whiteListEntry) {
             const movieIndex = whiteListEntry.movieIds.indexOf(movieId);
 
             if (movieIndex > -1) {
                 whiteListEntry.movieIds.splice(movieIndex, 1);
+                action = "removed";
             } else {
                 whiteListEntry.movieIds.push(movieId);
+                action = "added";
             }
 
             await whiteListEntry.save();
+            return {
+                success: true,
+                action,
+                message: `Whitelist ${action} successfully.`,
+                status: 200,
+            };
         } else {
             await whiteListModel.create({
                 userId: objectId,
                 movieIds: [movieId],
             });
+            return {
+                success: true,
+                action: "added",
+                message: `Whitelist created and movieId ${movieId} added.`,
+                status: 201,
+            };
         }
-
-        return {
-            success: true,
-            message: whiteListEntry
-                ? `Whitelist updated successfully.`
-                : `Whitelist created, and movieId ${movieId} added.`,
-            whiteList: whiteListEntry ? whiteListEntry.movieIds : [movieId],
-        };
     } catch (error) {
         console.error("Error updating whitelist:", error);
         return { success: false, message: "Failed to update whitelist." };

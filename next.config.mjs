@@ -3,7 +3,28 @@ const nextConfig = {
   // reactStrictMode: true, 
   // swcMinify: true,
   images: {
-    domains: ['facebook.com', 'x.com', 'linkedin.com', 'image.tmdb.org'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'facebook.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'x.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'linkedin.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'image.tmdb.org',
+        pathname: '/**',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
 };

@@ -25,7 +25,6 @@ export default function HandleWhiteListClient({ id, initialInterested }) {
                 if ( response.success )
                 {
                     setInterested( !interested );
-
                     toast.success( response?.message );
                 } else
                 {

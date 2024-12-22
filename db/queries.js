@@ -30,7 +30,6 @@ export async function updateWhiteList(userId, movieId) {
         }
 
         const objectId = new mongoose.Types.ObjectId(userId);
-
         const whiteListEntry = await whiteListModel.findOne({ userId: objectId });
 
         let action;
@@ -60,11 +59,13 @@ export async function updateWhiteList(userId, movieId) {
             return {
                 success: true,
                 action: "added",
-                message: `Whitelist created and movieId ${movieId} added.`,
+                message: `Whitelist added successfully.`,
                 status: 201,
             };
         }
-    } catch (error) {
+    }
+    catch ( error )
+    {
         console.error("Error updating whitelist:", error);
         return { success: false, message: "Failed to update whitelist." };
     }

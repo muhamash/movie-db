@@ -1,5 +1,7 @@
 import { getMovieById } from "@/utils/getMovie";
 
+export const dynamic = "force-dynamic"
+
 export async function GET(request, context) {
     try {
         const url = new URL( request.url );
@@ -30,7 +32,7 @@ export async function GET(request, context) {
                 status: 200,
                 success: true,
                 message: "Movies fetched successfully",
-                data: movieDataById?.result,
+                data: movieDataById,
             }),
             {
                 status: 200,

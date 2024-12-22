@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Slot from "@/components/compare/Slot";
 import { useState } from "react";
@@ -16,16 +16,16 @@ export default function SlotPage({ params }) {
     };
 
     return (
-        <>
+        <div className="grid gap-4">
             {Object.keys(slotsData).map((slotId) => (
                 <Slot
-                    slots={params?.slotId}
                     key={slotId}
                     id={slotId}
+                    slots={params?.slotId}
                     movie={slotsData[slotId]}
                     onUpdateSlot={handleUpdateSlot}
                 />
             ))}
-        </>
+        </div>
     );
 }

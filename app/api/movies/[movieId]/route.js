@@ -1,5 +1,7 @@
 import { getMovieList } from "@/utils/getMovie";
 
+export const dynamic = "force-dynamic"
+
 export async function GET(request, context) {
     try {
         const url = new URL( request.url );

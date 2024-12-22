@@ -1,11 +1,11 @@
 export default async function CompareLayout({
-  children,
-  slots,
+    children,
+    slotId
 }) {
     return (
-        <div>
-            <div>{ children }</div>
-            <div className="flex flex-col gap-5 bg-green-500 p-3">{ slots }</div>
+        <div className="container mx-auto px-4 pt-24 pb-8">
+            { children }
+            { slotId }
         </div>
     );
 }

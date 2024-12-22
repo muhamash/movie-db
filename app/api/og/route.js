@@ -3,6 +3,7 @@ import { ImageResponse } from '@vercel/og';
 export const runtime = "edge"
 export const dynamicParams = true
 export const revalidate = false
+export const dynamic = "force-dynamic"
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);

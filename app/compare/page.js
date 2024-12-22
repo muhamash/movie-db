@@ -1,25 +1,10 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import AddMovie from "@/components/compare/AddMovie";
 
-export default function ComparePage() {
-  const [slots, setSlots] = useState([]);
-  const router = useRouter();
-
-  const addSlot = () => {
-    const slotId = `slotId=${Date.now()}`;
-  
-    const updatedSlots = [ ...slots, slotId ]; 
-    const newUrl = `/compare/slots?${updatedSlots.join('&')}`;
-e
-    router.push(newUrl);
-    setSlots(updatedSlots);
-  };
-
+export default async function ComparePage() {
   return (
-    <div className="pt-[100px] font-lato">
-      <h1>Main Page</h1>
-      <button onClick={addSlot}>Add Slot</button>
+    <div className="pt-[50px] flex justify-between items-center mb-8">
+      <h1 className="text-3xl font-bold">Compare Movies</h1>
+      <AddMovie />
     </div>
   );
 }

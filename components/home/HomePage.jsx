@@ -1,11 +1,11 @@
-import Hero from "./home/Hero";
-import MoviesContainer from "./home/MoviesContainer";
+import Hero from "./Hero";
+import MoviesContainer from "./MoviesContainer";
 
 export default async function HomePage ()
 {  
     return (
         <div className="container mx-auto px-4 py-8">
-            <Hero />
+            < Hero/>
             <div className="mb-8">
                 <MoviesContainer isTrend={true} id="trending" heading="Trending Now" />
             </div>

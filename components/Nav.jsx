@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Drawer from "./Drawer";
-import Search from "./Search";
+import Search from "./search/Search";
 import UsersHandle from "./UserHandle";
 import WatchListLink from "./watchList/WatchListLink";
 

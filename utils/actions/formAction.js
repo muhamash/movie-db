@@ -2,15 +2,17 @@
 
 import { createUser, findUserByCredentials } from "@/db/queries";
 import { dbConnect } from "@/service/mongo";
-import { redirect } from "next/navigation";
 
 export async function registerUser(formData) {
     try {
         await dbConnect();
 
-        const password = formData.get("password");
-        const confirmPassword = formData.get("confirmPassword");
-        if (password !== confirmPassword) {
+        const credential = {};
+        credential.email = formData.get("email");
+        credential.password = formData.get( "password" );
+        credential.confirmPassword = formData.get("confirmPassword")
+        
+        if (credential.password !== credential.confirmPassword) {
             return {
                 message: "Passwords do not match",
                 status: 400,
@@ -18,13 +20,9 @@ export async function registerUser(formData) {
         }
 
         const user = Object.fromEntries( formData.entries() );
-        
-        const credential = {};
-        credential.email = formData.get("email");
-        credential.password = formData.get("password");
         const found = await findUserByCredentials(credential);
         
-        if ( !found )
+        if ( credential.password === credential.confirmPassword && !found )
         {
             await createUser(user);
         }
@@ -35,8 +33,6 @@ export async function registerUser(formData) {
                 status: 500,
             };
         }
-
-        redirect( "/login" );
         
     } catch (error) {
         console.error("Error during user registration:", error);
@@ -57,7 +53,7 @@ export async function performLogin ( formData )
         credential.password = formData.get("password");
         const found = await findUserByCredentials(credential);
         return found;
-        
+
     } catch (error) {
         throw error;
         return {

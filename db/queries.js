@@ -13,6 +13,7 @@ export async function createUser ( user )
 export async function findUserByCredentials ( credentials )
 {
     await dbConnect();
+    
     const user = await userModel.findOne(credentials).lean();
     if (user) {
         return replaceMongoIdInObject(user);

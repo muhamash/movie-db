@@ -64,8 +64,8 @@ export default function Search() {
     };
 
     const debouncedFetchSearchResults = useCallback(
-        debounce((query) => fetchSearchResults(query), 300),
-        []
+        debounce( ( query ) => fetchSearchResults( query ), 500 ),
+        [ query ]
     );
 
     const handleInputChange = (e) => {

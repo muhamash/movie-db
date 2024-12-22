@@ -2,10 +2,12 @@
 
 import { registerUser } from "@/utils/actions/formAction";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Registration() {
     const [ formState, setFormState ] = useState( { success: false, error: null } );
+    const router = useRouter();
     const [loading, setLoading] = useState(false); 
 
     const handleSubmit = async ( event ) =>
@@ -16,16 +18,11 @@ export default function Registration() {
 
         try
         {
-            const result = await registerUser( formData );
-
-            if ( result?.status === 500 )
-            {
-                setFormState( { success: false, error: result.message } );
-            } else
-            {
-                setFormState( { success: true, error: null } );
-                event.target.reset();
-            }
+            await registerUser( formData );
+            setFormState( { success: true, error: null } );
+            event.target.reset();
+            router.push( "/login" );
+            
         } catch ( error )
         {
             setFormState( { success: false, error: error } );

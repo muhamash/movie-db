@@ -1,4 +1,4 @@
-export default function compareLayout({
+export default async function CompareLayout({
   children,
   slots,
 }) {

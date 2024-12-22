@@ -1,5 +1,4 @@
 export default async function SlotPage({ searchParams }) {
-    // console.log(params)
     const slotIds = Array.isArray(searchParams?.slotId) 
         ? searchParams?.slotId
         : searchParams?.slotId 

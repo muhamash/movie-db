@@ -2,7 +2,7 @@
 
 import { registerUser } from "@/utils/actions/formAction";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Registration() {
@@ -13,24 +13,40 @@ export default function Registration() {
     const handleSubmit = async ( event ) =>
     {
         event.preventDefault();
-        setLoading(true); 
+        setLoading( true );
+
         const formData = new FormData( event.target );
+        const password = formData.get( "password" );
+        const confirmPassword = formData.get( "confirmPassword" );
+
+
+        if ( password !== confirmPassword )
+        {
+            setFormState( { success: false, error: "Passwords do not match!" } );
+            setLoading( false );
+            return;
+        }
 
         try
         {
-            await registerUser( formData );
-            setFormState( { success: true, error: null } );
-            event.target.reset();
-            router.push( "/login" );
-            
+            const response = await registerUser( formData );
+
+            if ( response.status === 201 )
+            {
+                setFormState( { success: true, error: null } );
+                event.target.reset();
+                router.push( "/login" );
+            } else
+            {
+                setFormState( { success: false, error: response.message } );
+            }
         } catch ( error )
         {
-            setFormState( { success: false, error: error } );
+            setFormState( { success: false, error: error.message } );
             console.error( "Registration error:", error );
-        }
-        finally
+        } finally
         {
-            setLoading(false);
+            setLoading( false );
         }
     };
 

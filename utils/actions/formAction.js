@@ -7,33 +7,26 @@ export async function registerUser(formData) {
     try {
         await dbConnect();
 
-        const credential = {};
-        credential.email = formData.get("email");
-        credential.password = formData.get( "password" );
-        credential.confirmPassword = formData.get("confirmPassword")
-        
-        if (credential.password !== credential.confirmPassword) {
+        const credential = {
+            email: formData.get("email"),
+            password: formData.get("password"),
+        };
+
+        const existingUser = await findUserByCredentials({ email: credential.email });
+        if (existingUser) {
             return {
-                message: "Passwords do not match",
+                message: "User with this email already exists.",
                 status: 400,
             };
         }
 
-        const user = Object.fromEntries( formData.entries() );
-        const found = await findUserByCredentials(credential);
-        
-        if ( credential.password === credential.confirmPassword && !found )
-        {
-            await createUser(user);
-        }
+        const user = Object.fromEntries(formData.entries());
+        await createUser(user);
 
-        if (found) {
-            return {
-                message: "Failed to create user. Duplicate user detected!!!",
-                status: 500,
-            };
-        }
-        
+        return {
+            message: "User registered successfully!",
+            status: 201,
+        };
     } catch (error) {
         console.error("Error during user registration:", error);
         return {

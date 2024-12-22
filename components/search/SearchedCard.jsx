@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import { handleMovieClick } from '@/utils/actions/serverActions';
+import { formatDate } from '@/utils/utils';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
@@ -12,27 +13,6 @@ export default function SearchedCard({ movie }) {
     const [ isPending, startTransition ] = useTransition();
     const [isImageLoaded, setImageLoaded] = useState(false);
     const router = useRouter();
-
-    const getOrdinalSuffix = ( day ) =>
-    {
-        if ( day > 3 && day < 21 ) return 'th';
-        switch ( day % 10 )
-        {
-            case 1: return 'st';
-            case 2: return 'nd';
-            case 3: return 'rd';
-            default: return 'th';
-        }
-    };
-
-    const formatDate = ( dateString ) =>
-    {
-        const date = new Date( dateString );
-        const day = date.getDate();
-        const month = date.toLocaleString( 'default', { month: 'long' } );
-        const year = date.getFullYear();
-        return `${day}${getOrdinalSuffix( day )} ${month} ${year}`;
-    };
 
     const { auth } = useAuth();
 

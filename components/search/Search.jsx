@@ -4,6 +4,7 @@ import { searchMovies } from "@/utils/actions/SearcMovies";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useCallback, useReducer } from "react";
+import Resutl from "../compare/Resutl";
 
 const searchReducer = (state, action) => {
     switch (action.type) {
@@ -123,25 +124,17 @@ export default function Search() {
                 {results && !error && !isLoading && isDropdownVisible && (
                     <motion.div
                         id="searchResults"
-                        className="absolute w-full mt-2 bg-slate-800 bg-opacity-90 rounded-lg backdrop-blur-md"
+                        className="absolute w-[250px] mt-2 bg-slate-800 bg-opacity-90 rounded-lg backdrop-blur-md"
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
                     >
-                        <ul className="max-h-[200px] overflow-y-auto">
-                            {results.map((movie) => (
-                                <motion.li
-                                    onClick={() => handleResultClick(movie.id)}
-                                    key={movie.id}
-                                    className="px-4 py-2 text-yellow-500 cursor-pointer hover:shadow-sm hover:bg-yellow-600 hover:text-white font-nunito text-sm font-normal"
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: 10 }}
-                                    transition={{ duration: 0.2, ease: "easeOut" }}
-                                >
-                                    {movie.title}
-                                </motion.li>
+                        <ul className="max-h-[350px] w-fit overflow-y-auto">
+                            {results?.map((movie) => (
+                                <button onClick={()=> handleResultClick(movie?.id)} key={movie?.id}>
+                                    <Resutl data={movie}/>
+                                </button>
                             ))}
                             {query && results.length === 0 && (
                                 <motion.li

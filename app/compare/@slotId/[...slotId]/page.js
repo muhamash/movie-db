@@ -1,16 +1,31 @@
-import Slot from "@/components/compare/Slot";
+'use client'
 
-export default async function SlotPage({ params }) {
-    const { slotId } = params;
-    console.log( params )
-    
+import Slot from "@/components/compare/Slot";
+import { useState } from "react";
+
+export default function SlotPage({ params }) {
+    const [slotsData, setSlotsData] = useState(
+        params?.slotId?.reduce((acc, slotId) => ({ ...acc, [slotId]: null }), {})
+    );
+
+    const handleUpdateSlot = (slotId, movie) => {
+        setSlotsData((prev) => ({
+            ...prev,
+            [slotId]: movie,
+        }));
+    };
+
     return (
         <>
-            {
-                params?.slotId?.map( ( slot ) => (
-                    <Slot key={slot} id={slot} slots={params.slotId}/>
-                ))
-            }
+            {Object.keys(slotsData).map((slotId) => (
+                <Slot
+                    slots={params?.slotId}
+                    key={slotId}
+                    id={slotId}
+                    movie={slotsData[slotId]}
+                    onUpdateSlot={handleUpdateSlot}
+                />
+            ))}
         </>
     );
-};
+}

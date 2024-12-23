@@ -1,4 +1,4 @@
-import { removeMovieFromWhiteList } from "@/utils/actions/whiteListAction";
+import { addWhiteList } from "@/utils/actions/whiteListAction";
 import { getMovieById } from "@/utils/getMovie";
 import NoList from "./NoList";
 import Template from "./Template";
@@ -32,7 +32,7 @@ export default async function WatchList({ id }) {
     const movieId = data.get("movieId");
 
     try {
-      await removeMovieFromWhiteList(id, movieId);
+      await addWhiteList(id, movieId);
     } catch (error) {
       console.error("Error removing movie:", error);
     }

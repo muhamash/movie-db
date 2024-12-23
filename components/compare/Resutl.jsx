@@ -22,7 +22,7 @@ export default function Resutl({data}) {
                 <h3 className="font-bold text-left text-[15px]">
                     { data?.title }
                 </h3>
-                <p className="text-[12px] text-gray-400 text-left">{ formatDate( data?.release_date ) || null }</p>
+                <p className="text-[12px] text-gray-400 text-left">{ formatDate( data?.release_date ) || "date not found" }</p>
             </div>
         </motion.li>
     );

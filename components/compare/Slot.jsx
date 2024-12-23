@@ -6,31 +6,38 @@ import MovieForm from './MovieForm';
 import RemoveMovie from './RemoveMovie';
 import SearchModal from './SearchModal';
 
-export default function Slot({ id, movie, onUpdateSlot, slots }) {
+export default function Slot({ id, movieId, onUpdateSlot, slots }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [movieDetails, setMovieDetails] = useState(null);
 
-    useEffect(() => {
-        if (!movie?.id) return;
+    useEffect( () =>
+    {
+        
+        if ( !movieId ) return;
 
-        const fetchMovieDetails = async () => {
-            try {
+        const fetchMovieDetails = async () =>
+        {
+            try
+            {
                 const response = await fetch(
-                    `http://localhost:3000/api/movies?id=${movie.id}`
+                    `http://localhost:3000/api/movies?id=${movieId}`
                 );
-                if (!response.ok) {
-                    throw new Error('Failed to fetch movie details');
+                if ( !response.ok )
+                {
+                    throw new Error( 'Failed to fetch movie details' );
                 }
                 const data = await response.json();
-                setMovieDetails(data.data);
-            } catch (error) {
-                console.error('Error fetching movie details:', error);
+                setMovieDetails( data.data );
+            } catch ( error )
+            {
+                console.error( 'Error fetching movie details:', error );
             }
         };
 
         fetchMovieDetails();
-    }, [movie?.id]);
+    }, [ movieId ] );
 
+    console.log( movieDetails );
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
@@ -51,7 +58,7 @@ export default function Slot({ id, movie, onUpdateSlot, slots }) {
                 </div>
             )}
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
                 {isModalOpen && (
                     <motion.div
                         className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"

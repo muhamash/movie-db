@@ -70,8 +70,8 @@ export default function SearchModal({ onClose, modalId, onUpdateSlot }) {
         debouncedFetchSearchResults(query);
     };
 
-    const handleModalLink = (id, movie) => {
-        onUpdateSlot(id, movie);
+    const handleModalLink = (id, movieId) => {
+        onUpdateSlot(id, movieId);
         onClose();
     };
 
@@ -125,7 +125,7 @@ export default function SearchModal({ onClose, modalId, onUpdateSlot }) {
                         >
                             <ul className="max-h-[400px]  overflow-y-auto">
                                 {results.map((movie) => (
-                                    <div onClick={() => handleModalLink(modalId, movie)} key={movie.id}>
+                                    <div onClick={() => handleModalLink(modalId, movie?.id)} key={movie.id}>
                                         <Resutl data={movie} />
                                     </div>
                                 ))}

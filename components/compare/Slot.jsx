@@ -39,7 +39,7 @@ export default function Slot({ id, movie, onUpdateSlot, slots }) {
             <RemoveMovie id={id} slots={slots} />
 
             {movieDetails ? (
-                <MovieForm movie={movieDetails || movie} />
+                <MovieForm movie={movieDetails} />
             ) : (
                 <div className="flex-grow flex flex-col items-center justify-center">
                     <button

@@ -5,24 +5,25 @@ import { useState } from "react";
 
 export default function SlotPage({ params }) {
     const [slotsData, setSlotsData] = useState(
-        params?.slotId?.reduce((acc, slotId) => ({ ...acc, [slotId]: null }), {})
+        params?.slotId?.map((slotId) => ({ slotId, movie: null })) || []
     );
 
     const handleUpdateSlot = (slotId, movie) => {
-        setSlotsData((prev) => ({
-            ...prev,
-            [slotId]: movie,
-        }));
+        setSlotsData((prev) =>
+            prev.map((slot) =>
+                slot.slotId === slotId ? { ...slot, movie } : slot
+            )
+        );
     };
 
     return (
-        <div className="grid gap-4">
-            {Object.keys(slotsData).map((slotId) => (
+        <div className="grid gap-6 md:grid-cols-2">
+            {slotsData.map(({ slotId, movie }) => (
                 <Slot
                     key={slotId}
                     id={slotId}
                     slots={params?.slotId}
-                    movie={slotsData[slotId]}
+                    movie={movie}
                     onUpdateSlot={handleUpdateSlot}
                 />
             ))}

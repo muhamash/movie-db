@@ -1,56 +1,64 @@
-import { getMovieById } from '@/utils/getMovie';
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import NoList from './NoList';
-// import Template from './Template';
-
-const Template = dynamic( () => import( './Template' ) );
+import { removeMovieFromWhiteList } from "@/utils/actions/whiteListAction";
+import { getMovieById } from "@/utils/getMovie";
+import NoList from "./NoList";
+import Template from "./Template";
 
 export default async function WatchList({ id }) {
-    let data = null;
-    let movieData = [];
+  let data = null;
+  let movieData = [];
 
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/whiteList?userId=${id}`, {
-            cache: "no-store",
-        });
+  try {
 
-        if (!response.ok) {
-            throw new Error(`not found! status: ${response.message}`);
-        }
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/whiteList?userId=${id}`, {
+      cache: "no-store",
+    });
 
-        data = await response.json();
-
-        // console.log( data );
-        if (data?.data?.length > 0) {
-            const moviePromises = data.data.map(movieId => getMovieById(movieId));
-            movieData = await Promise.all(moviePromises);
-        }
-    } catch (error) {
-        console.error('Error fetching data:', error);
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.statusText}`);
     }
 
-    return (
-        <div className="container mx-auto pt-24 pb-8">
-            <header className="mb-8">
-                <h1 className="text-4xl font-bold text-white">Watch Later</h1>
-                <p className="text-light/70 mt-2 font-lato">
-                    Movies you&#39;ve saved to watch in the future
-                </p>
-            </header>
+    data = await response.json();
 
-            <Suspense fallback={ <div className="animate-pulse w-full h-[288px] bg-zinc-800 rounded-lg" /> }>
-                <div id="watchLaterList" className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    { movieData.length > 0 && movieData.map( ( movie, index ) => (
-                        <Template key={ index } userId={id} movie={ movie.movieDataById } />
-                    ) ) }
-                </div>
-            </Suspense>
-            {
-                movieData.length === 0 && ( <div className="w-full flex items-center justify-center">
-                    <NoList />
-                </div> )
-            }
-        </div>
-    );
+    if (data?.data?.length > 0) {
+      const moviePromises = data.data.map((movieId) => getMovieById(movieId));
+      movieData = await Promise.all(moviePromises);
+    }
+  } catch (error) {
+    console.error("Error fetching watch list:", error);
+  }
+
+  async function handleRemove(data) {
+    "use server";
+
+    const movieId = data.get("movieId");
+
+    try {
+      await removeMovieFromWhiteList(id, movieId);
+    } catch (error) {
+      console.error("Error removing movie:", error);
+    }
+  }
+
+  return (
+    <div className="container mx-auto pt-24 pb-8">
+      <header className="mb-8">
+        <h1 className="text-4xl font-bold text-white">Watch Later</h1>
+        <p className="text-light/70 mt-2 font-lato">
+          Movies you&#39;ve saved to watch in the future
+        </p>
+      </header>
+
+      <div id="watchLaterList" className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {movieData.length > 0 ? (
+          movieData.map((movie, index) => (
+            <Template key={index} movie={movie.movieDataById} userId={id} onRemove={handleRemove} />
+          ))
+        ) : (
+          <div className="w-full flex items-center justify-center">
+            <NoList />
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }

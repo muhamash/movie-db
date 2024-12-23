@@ -16,18 +16,18 @@ export default function SlotPage({ params }) {
         );
     };
 
-    console.log( slotsData );
+    console.log(slotsData);
     return (
         <div className="grid gap-6 md:grid-cols-2">
-            { slotsData.map( ( { slotId, movieId } ) => (
+            {slotsData.map(({ slotId, movieId }) => (
                 <Slot
-                    key={ slotId }
-                    id={ slotId }
-                    slots={ params?.slotId }
-                    movieId={ movieId }
-                    onUpdateSlot={ handleUpdateSlot }
+                    key={slotId}
+                    id={slotId}
+                    slots={params?.slotId}
+                    movieId={movieId}
+                    onUpdateSlot={handleUpdateSlot}
                 />
-            ) ) }
+            ))}
         </div>
     );
 }

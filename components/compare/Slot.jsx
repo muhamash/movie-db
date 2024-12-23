@@ -10,34 +10,28 @@ export default function Slot({ id, movieId, onUpdateSlot, slots }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [movieDetails, setMovieDetails] = useState(null);
 
-    useEffect( () =>
-    {
-        
-        if ( !movieId ) return;
+    useEffect(() => {
+        if (!movieId) return;
 
-        const fetchMovieDetails = async () =>
-        {
-            try
-            {
+        const fetchMovieDetails = async () => {
+            try {
                 const response = await fetch(
                     `http://localhost:3000/api/movies?id=${movieId}`
                 );
-                if ( !response.ok )
-                {
-                    throw new Error( 'Failed to fetch movie details' );
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movie details');
                 }
                 const data = await response.json();
-                setMovieDetails( data.data );
-            } catch ( error )
-            {
-                console.error( 'Error fetching movie details:', error );
+                setMovieDetails(data.data);
+            } catch (error) {
+                console.error('Error fetching movie details:', error);
             }
         };
 
         fetchMovieDetails();
-    }, [ movieId ] );
+    }, [movieId]);
 
-    console.log( movieDetails );
+    console.log(movieDetails);
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 

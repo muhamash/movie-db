@@ -6,12 +6,12 @@ export default function MovieForm({ movie }) {
             <div className="col-span-2 h-full">
                 <Image
                     width={ 220 }
-                    height={400}
+                    height={ 400 }
                     src={
-                movie?.poster_path
-                  ? `https://image.tmdb.org/t/p/original${movie?.poster_path}`
-                  : '/assets/icons/commingSoon.svg'
-              }
+                        movie?.poster_path
+                            ? `https://image.tmdb.org/t/p/original${movie?.poster_path}`
+                            : '/assets/icons/commingSoon.svg'
+                    }
                     alt={ movie?.original_title }
                     className="w-full rounded-lg mb-4 object-contain max-h-full"
                 />
@@ -20,7 +20,7 @@ export default function MovieForm({ movie }) {
             <div className="w-full space-y-4 col-span-3">
                 <div className="bg-zinc-800 p-3 rounded">
                     <span className="text-gray-400">Rating:</span>
-                    <span className="float-right">{ movie?.vote_average }</span>
+                    <span className="float-right">{ movie?.vote_average.toFixed(1) }</span>
                 </div>
                 <div className="bg-zinc-800 p-3 rounded">
                     <span className="text-gray-400">Release Date:</span>
@@ -44,7 +44,7 @@ export default function MovieForm({ movie }) {
                         { movie?.genres?.length > 0 ? (
                             movie?.genres?.map( ( genre, index ) => (
                                 <span key={ index } className="bg-zinc-700 px-2 py-1 rounded-full text-sm">
-                                    { genre }
+                                    { genre.name }
                                 </span>
                             ) )
                         ) : (
@@ -55,4 +55,4 @@ export default function MovieForm({ movie }) {
             </div>
         </div>
     );
-}
+};

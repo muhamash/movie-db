@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Template ( { movie, userId, onRemove } )
+export default async function Template ( { movie, userId, onRemove } )
 {
     
     return (

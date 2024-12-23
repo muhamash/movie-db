@@ -80,7 +80,11 @@ export default async function MovieDetails ( { movieData, castData, userId, movi
                             </Suspense>
 
                             {/* Actions */ }
-                            <HandleWhiteListServer userId={ userId } movieId={ movieId } />
+                            <Suspense fallback={
+                                <p>loadingg</p>
+                            }>
+                                <HandleWhiteListServer userId={ userId } movieId={ movieId } />
+                            </Suspense>
 
                             {/* Share Buttons */ }
                             <ShareButtons movieId={movieId} userId={ userId } />

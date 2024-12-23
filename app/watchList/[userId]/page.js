@@ -1,4 +1,5 @@
 import WatchList from '@/components/watchList/WatchList';
+import { Suspense } from 'react';
 
 export const metadata = {
   title: "MovieDB -> Watch list",
@@ -8,8 +9,12 @@ export const metadata = {
 export default async function WatchListPage ({ params} )
 {
   return (
-    <>
+    <Suspense fallback={
+      <p>
+        loading
+      </p>
+    }>
       <WatchList id={params?.userId}/>
-    </>
+    </Suspense>
   );
 }

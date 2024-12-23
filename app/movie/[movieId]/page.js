@@ -1,5 +1,6 @@
 import MovieDetailsPage from "@/components/movieDetails/MovieDetailsPage";
 import { getMovieById } from "@/utils/getMovie";
+import { Suspense } from "react";
 
 export async function generateMetadata(params) {
   const movieInfo = await getMovieById( params?.params?.movieId );
@@ -24,8 +25,12 @@ export async function generateMetadata(params) {
 export default async function MoviePage (params)
 {
   return (
-    <>
+    <Suspense fallback={
+      <p>
+        loading
+      </p>
+    }>
       <MovieDetailsPage id={ params?.params?.movieId } userId={ params?.searchParams?.userId } />
-    </>
+    </Suspense>
   );
 }

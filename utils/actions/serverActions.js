@@ -5,7 +5,7 @@ export async function handleMovieClick(movieId, auth) {
     {
       if ( !movieId ) throw new Error( "Movie ID is required." );
       const userId = auth?.id ?? 'notLoggedIn';
-      const redirectUrl = `https://movie-db-eight-sable.vercel.app/movie/${movieId}?userId=${userId}`;
+      const redirectUrl = `${process.env.NEXT_PUBLIC_URL}/movie/${movieId}?userId=${userId}`;
       
       return redirectUrl;
       
@@ -19,10 +19,10 @@ export async function handleWatchListClick ( userId )
 { 
   if (userId) {
     // return `/watchList/${userId}`;
-    return `https://movie-db-eight-sable.vercel.app/watchList/${userId}`;
+    return `${process.env.NEXT_PUBLIC_URL}/watchList/${userId}`;
   }
   else {
     // return `/login`;
-    return `https://movie-db-eight-sable.vercel.app/login`;
+    return `${process.env.NEXT_PUBLIC_URL}/login`;
   }
 };

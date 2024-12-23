@@ -5,7 +5,7 @@ export async function searchMovies(formData) {
         const query = formData.get("search")?.trim();
         if (!query) return []; 
 
-        const res = await fetch(`https://movie-db-eight-sable.vercel.app/api/search?query=${query}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/search?query=${query}`);
         
         if (!res.ok) {
             console.warn(`Error fetching data: ${res.statusText}`);

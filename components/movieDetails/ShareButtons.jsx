@@ -14,7 +14,7 @@ import
 
 export default function ShareButtons({  userId, movieId }) {
 
-    const url = `https://movie-db-eight-sable.vercel.app/movie/${movieId}?userId=${userId ?? "notLoggedIn"}`;
+    const url = `${process.env.NEXT_PUBLIC_URL}/movie/${movieId}?userId=${userId ?? "notLoggedIn"}`;
 
     // console.log( url );
     return (

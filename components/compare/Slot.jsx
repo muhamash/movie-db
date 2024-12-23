@@ -31,7 +31,7 @@ export default function Slot({ id, movieId, onUpdateSlot, onRemoveSlot, slots })
         fetchMovieDetails();
     }, [movieId]);
 
-    console.log(movieDetails);
+    // console.log(movieDetails);
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 

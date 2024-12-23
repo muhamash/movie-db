@@ -1,19 +1,22 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function AddMovie() {
-  const router = useRouter();
   const pathname = usePathname();
 
   const addSlot = () => {
     const newSlotId = `${Date.now()}`;
 
-    if (pathname.startsWith('/compare')) {
-      router.push(`${pathname}/${newSlotId}`);
-    } else {
-      router.push(`/compare/${newSlotId}`);
-    }
+    const newUrl = pathname.startsWith('/compare')
+      ? `${pathname}/${newSlotId}`
+      : `/compare/${newSlotId}`;
+
+    // Update the URL without reloading the page
+    window.history.replaceState(null, '', newUrl);
+
+    // Trigger a custom event to notify SlotPage to add the slot
+    window.dispatchEvent(new CustomEvent('slotAdded', { detail: { newSlotId } }));
   };
 
   return (

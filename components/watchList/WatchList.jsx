@@ -8,7 +8,7 @@ export default async function WatchList({ id }) {
   let movieData = [];
 
     try {
-        const response = await fetch(`https://movie-db-eight-sable.vercel.app/api/whiteList?userId=${id}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/whiteList?userId=${id}`, {
             cache: "no-store",
         });
 
@@ -24,42 +24,44 @@ export default async function WatchList({ id }) {
     }
   } catch (error) {
     console.error("Error fetching watch list:", error);
-  }
+    }
 
   async function handleRemove(data) {
   "use server";
-  const movieId = data.get("movieId");
+      const movieId = data.get( "movieId" );
+      console.log( movieId );
 
   try {
-    await addWhiteList(id, movieId);
+        await addWhiteList(id, movieId);
 
-    const updatedMovies = movieData.filter(movie => movie.id !== movieId);
-    setMovieData(updatedMovies);  
-  } catch (error) {
-    console.error("Error removing movie:", error);
+        movieData = movieData.filter(movie => movie.id !== movieId);
+    }
+    catch ( error )
+  {
+      console.error( "Error removing movie:", error );
       };
     };
 
-  return (
-    <div className="container mx-auto pt-24 pb-8">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold text-white">Watch Later</h1>
-        <p className="text-light/70 mt-2 font-lato">
-          Movies you&#39;ve saved to watch in the future
-        </p>
-      </header>
+    return (
+        <div className="container mx-auto pt-24 pb-8">
+            <header className="mb-8">
+                <h1 className="text-4xl font-bold text-white">Watch Later</h1>
+                <p className="text-light/70 mt-2 font-lato">
+                    Movies you&#39;ve saved to watch in the future
+                </p>
+            </header>
 
-      <div id="watchLaterList" className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {movieData.length > 0 ? (
-          movieData.map((movie, index) => (
-            <Template key={index} movie={movie.movieDataById} userId={id} onRemove={handleRemove} />
-          ))
-        ) : (
-          <div className="w-full flex items-center justify-center">
-            <NoList />
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+            <div id="watchLaterList" className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                { movieData.length > 0 ? (
+                    movieData.map( ( movie, index ) => (
+                        <Template key={ index } movie={ movie.movieDataById } userId={ id } onRemove={ handleRemove } />
+                    ) )
+                ) : (
+                    <div className="w-full flex items-center justify-center">
+                        <NoList />
+                    </div>
+                ) }
+            </div>
+        </div>
+    );
+};

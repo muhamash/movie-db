@@ -6,7 +6,7 @@ import MovieForm from './MovieForm';
 import RemoveMovie from './RemoveMovie';
 import SearchModal from './SearchModal';
 
-export default function Slot({ id, movieId, onUpdateSlot, slots }) {
+export default function Slot({ id, movieId, onUpdateSlot, onRemoveSlot, slots }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [movieDetails, setMovieDetails] = useState(null);
 
@@ -37,7 +37,7 @@ export default function Slot({ id, movieId, onUpdateSlot, slots }) {
 
     return (
         <div className="bg-zinc-900 font-lato rounded-lg p-4 flex flex-col min-h-[400px]">
-            <RemoveMovie id={id} slots={slots} />
+            <RemoveMovie id={id} slots={slots} onRemoveSlot={onRemoveSlot} />
 
             {movieDetails ? (
                 <MovieForm movie={movieDetails} />

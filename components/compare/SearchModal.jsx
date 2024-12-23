@@ -15,7 +15,7 @@ const searchReducer = (state, action) => {
             return { ...state, isLoading: false, error: action.payload };
         case "SET_QUERY":
             return { ...state, query: action.payload };
-        case "CLEAR_QUERY":
+        case "CLEAR_QUERY": 
             return { ...state, query: "", results: [], isLoading: false, error: null };
         default:
             return state;
@@ -101,7 +101,7 @@ export default function SearchModal({ onClose, modalId, onUpdateSlot }) {
                     value={query}
                     onChange={handleInputChange}
                 />
-
+                
                 <AnimatePresence>
                     {isLoading && (
                         <motion.div
@@ -124,7 +124,7 @@ export default function SearchModal({ onClose, modalId, onUpdateSlot }) {
                             transition={{ duration: 0.3, ease: "easeOut" }}
                         >
                             <ul className="max-h-[400px]  overflow-y-auto">
-                                {results?.map((movie) => (
+                                {results.map((movie) => (
                                     <div onClick={() => handleModalLink(modalId, movie?.id)} key={movie.id}>
                                         <Resutl data={movie} />
                                     </div>

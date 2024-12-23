@@ -7,7 +7,7 @@ export default async function HandleWhiteListServer({ userId, movieId }) {
 
     if (userId !== "notLoggedIn" && movieId) {
         try {
-            const response = await fetch( `https://movie-db-eight-sable.vercel.app/api/whiteList?userId=${userId}`, {
+            const response = await fetch( `${process.env.NEXT_PUBLIC_API_URL}/whiteList?userId=${userId}`, {
                 cache: "no-store",
             } );
 

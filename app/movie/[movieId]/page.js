@@ -11,7 +11,7 @@ export async function generateMetadata(params) {
     openGraph: {
       images:
       {
-        url : `https://movie-db-eight-sable.vercel.app/api/og?title=${encodeURIComponent(
+        url : `${process.env.NEXT_PUBLIC_API_URL}/og?title=${encodeURIComponent(
           movieInfo?.movieDataById?.original_title
         )}&description=${encodeURIComponent( movieInfo?.movieDataById?.overview )}&cover=${encodeURIComponent( `https://image.tmdb.org/t/p/original${movieInfo?.movieDataById?.poster_path}` )}`,
         width: 1200,

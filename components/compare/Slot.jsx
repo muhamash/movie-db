@@ -17,7 +17,7 @@ export default function Slot ( { id, movieId, onUpdateSlot, onRemoveSlot } )
         const fetchMovieDetails = async () => {
             try {
                 const response = await fetch(
-                    `https://movie-db-eight-sable.vercel.app/api/movies?id=${movieId}`
+                    `${process.env.NEXT_PUBLIC_API_URL}/movies?id=${movieId}`
                 );
                 if (!response.ok) {
                     throw new Error('Failed to fetch movie details');

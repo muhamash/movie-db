@@ -39,8 +39,8 @@ export default function InfiniteScrollWrapper({
       try
       {
         const endpoint = type
-          ? `https://movie-db-eight-sable.vercel.app/api/movies/${movieId}?page=${page}&id=${type}`
-          : `https://movie-db-eight-sable.vercel.app/api/search?query=${query}&page=${page}`;
+          ? `${process.env.NEXT_PUBLIC_API_URL}/movies/${movieId}?page=${page}&id=${type}`
+          : `${process.env.NEXT_PUBLIC_API_URL}/search?query=${query}&page=${page}`;
           
         const response = await fetch( endpoint );
 

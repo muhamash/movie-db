@@ -3,7 +3,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { addWhiteList } from "@/utils/actions/whiteListAction";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import toast, { Toaster } from 'react-hot-toast';
+// import toast, { Toaster } from 'react-hot-toast';
 
 export default function HandleWhiteListClient({ id, initialInterested }) {
     const [interested, setInterested] = useState(initialInterested);
@@ -25,10 +25,10 @@ export default function HandleWhiteListClient({ id, initialInterested }) {
                 if ( response.success )
                 {
                     setInterested( !interested );
-                    toast.success( response?.message );
+                    // toast.success( response?.message );
                 } else
                 {
-                    toast.error( "Failed to update your watch list." );
+                    // toast.error( "Failed to update your watch list." );
                 }
             } catch ( error )
             {
@@ -88,7 +88,7 @@ export default function HandleWhiteListClient({ id, initialInterested }) {
                     }
                 </button>
             </div>
-            <Toaster />
+            {/* <Toaster /> */}
         </div>
     );
 }

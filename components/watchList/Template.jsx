@@ -1,6 +1,8 @@
 import Image from "next/image";
 
-export default function Template({ movie, userId, onRemove }) {
+export default function Template ( { movie, userId, onRemove } )
+{
+    
     return (
         <div className="bg-moviedb-black rounded-lg overflow-hidden shadow-lg group cursor-pointer relative">
             <Image

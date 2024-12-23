@@ -27,16 +27,18 @@ export default async function WatchList({ id }) {
   }
 
   async function handleRemove(data) {
-    "use server";
+  "use server";
+  const movieId = data.get("movieId");
 
-    const movieId = data.get("movieId");
+  try {
+    await addWhiteList(id, movieId);
 
-    try {
-      await addWhiteList(id, movieId);
-    } catch (error) {
-      console.error("Error removing movie:", error);
-    }
-  }
+    const updatedMovies = movieData.filter(movie => movie.id !== movieId);
+    setMovieData(updatedMovies);  
+  } catch (error) {
+    console.error("Error removing movie:", error);
+      };
+    };
 
   return (
     <div className="container mx-auto pt-24 pb-8">
